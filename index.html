@@ -1436,6 +1436,59 @@
     #hotspot-portal { width: 190px; font-size: 0.78rem; }
   }
 
+    /* =============================================
+       SECTION 5A — Evidence Table
+    ============================================= */
+    .s5a-evidence-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: var(--font-body);
+      font-size: 18px;
+      background: rgba(255,255,255,0.04);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .s5a-evidence-table th {
+      background: var(--navy-dark);
+      color: var(--blue);
+      font-family: var(--font-ui);
+      font-size: 15px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 12px 14px;
+      text-align: left;
+      border-bottom: 2px solid rgba(59,130,246,0.3);
+    }
+
+    .s5a-evidence-table td {
+      padding: 14px;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      color: var(--off-white);
+      vertical-align: middle;
+    }
+
+    .s5a-evidence-table tr:last-child td { border-bottom: none; }
+
+    .s5a-evidence-table tr:hover td {
+      background: rgba(59,130,246,0.05);
+    }
+
+    .s5a-evidence-img {
+      width: 100%;
+      max-width: 200px;
+      height: auto;
+      border-radius: 6px;
+      display: block;
+      box-shadow: var(--shadow-sm);
+    }
+
+    @media (max-width: 600px) {
+      .s5a-evidence-img { max-width: 140px; }
+      .s5a-evidence-table th,
+      .s5a-evidence-table td { padding: 10px 8px; font-size: 16px; }
+    }
+
   </style>
 </head>
 <body>
@@ -1798,7 +1851,7 @@ Cause and Effect; Systems and System Models; Energy and Matter</p>
       <!-- ── NAVIGATION ── -->
       <div class="nav-row">
         <button class="btn btn-back" onclick="goBack()">← Back</button>
-        <button class="btn btn-continue" onclick="navigateTo('section-5')">Continue →</button>
+        <button class="btn btn-continue" onclick="navigateTo('section-5a')">Continue →</button>
       </div>
 
     </div>
@@ -1935,7 +1988,7 @@ Cause and Effect; Systems and System Models; Energy and Matter</p>
       <!-- ── NAVIGATION ── -->
       <div class="nav-row">
         <button class="btn btn-back" onclick="goBack()">← Back</button>
-        <button class="btn btn-continue" onclick="navigateTo('section-5')">Continue →</button>
+        <button class="btn btn-continue" onclick="navigateTo('section-5a')">Continue →</button>
       </div>
 
     </div>
@@ -1943,64 +1996,144 @@ Cause and Effect; Systems and System Models; Energy and Matter</p>
 
 
     <!-- ===================================================
-       SECTION 5 — DP1 Convergence: Connecting Motion and Change
+       SECTION 5A — DP1 Convergence: What Did We Notice?
   =================================================== -->
-  <section id="section-5" class="section">
+  <section id="section-5a" class="section">
     <div class="section-header convergence">
-      <div class="section-tag convergence">Section 5 · Convergence — DP1</div>
-      <div class="section-title">Connecting Motion and Change</div>
+      <div class="section-tag convergence">Section 5A · Convergence — DP1</div>
+      <div class="section-title">What Did We Notice?</div>
     </div>
     <div class="section-body convergence-body">
 
       <div class="convergence-tag">🔵 Both Paths Converge Here</div>
 
       <div class="narrative">
-        <!-- PLACEHOLDER: Convergence narrative — bridging motion + damage -->
-        <div class="placeholder">
-          <div class="placeholder-label">📋 Placeholder — Convergence Narrative</div>
-          <div class="placeholder-desc">
-            Help students connect what both paths revealed: the motion (speed)
-            before the crash and the visible changes (damage) during the crash
-            are linked by energy. More speed = more energy = more change.
-            This section should explicitly bridge both paths.
-          </div>
-        </div>
+        <p>Your investigation team has now shared evidence from the first crash-test review. Some teams started by looking at what was happening before the crash. Other teams started by looking at what happened during the crash.</p>
+        <p>Even though your teams started in different places, the evidence points to the same question: What patterns can we notice across the test runs?</p>
+        <p>Before your team explains why the crashes were different, look closely at the motion data and the post-impact observations.</p>
       </div>
 
-      <!-- PLACEHOLDER: Connecting diagram / visualization -->
-      <div class="img-placeholder" style="min-height: 160px;">
-        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-          <path d="M5 12h14m-4-4 4 4-4 4"/>
-        </svg>
-        <span>Placeholder — Motion → Impact → Change Diagram or Model</span>
-      </div>
-
-      <!-- PLACEHOLDER: Synthesis interaction -->
-      <div class="placeholder">
-        <div class="placeholder-label">🧪 Placeholder — Synthesis Interaction</div>
-        <div class="placeholder-desc">
-          Add a matching, sorting, or annotation activity where students connect
-          what they observed in their chosen path to what students on the other
-          path discovered. Could be a simple drag-and-drop or fill-in table.
-        </div>
+      <!-- Evidence Table -->
+      <div style="overflow-x:auto; margin: 20px 0;">
+        <table class="s5a-evidence-table">
+          <thead>
+            <tr>
+              <th>Test Run #</th>
+              <th>Motion Data</th>
+              <th>Post-Impact Observations</th>
+              <th>Post-Impact Image</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Test Run 1</strong></td>
+              <td>Slower motion before impact</td>
+              <td>Less front-end change after impact</td>
+              <td>
+                <img src="images/Energy_TestRun1.png"
+                     alt="Test Run 1 — vehicle front-end after impact, showing minimal deformation"
+                     class="s5a-evidence-img"
+                     onerror="this.style.display='none'" />
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Test Run 2</strong></td>
+              <td>Fastest motion before impact</td>
+              <td>Most front-end change after impact</td>
+              <td>
+                <img src="images/Energy_TestRun2.png"
+                     alt="Test Run 2 — vehicle front-end after impact, showing greatest deformation"
+                     class="s5a-evidence-img"
+                     onerror="this.style.display='none'" />
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Test Run 3</strong></td>
+              <td>Medium motion before impact</td>
+              <td>Moderate front-end change after impact</td>
+              <td>
+                <img src="images/Energy_TestRun3.png"
+                     alt="Test Run 3 — vehicle front-end after impact, showing moderate deformation"
+                     class="s5a-evidence-img"
+                     onerror="this.style.display='none'" />
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
 
       <!-- Field Journal -->
       <div class="field-journal">
         <div class="journal-header">
           <div class="journal-icon">📓</div>
-          <div class="journal-label">Field Journal — Convergence 1</div>
-          <div class="journal-save-badge" id="saved-s5">✔ Saved</div>
+          <div class="journal-label">Field Journal — Convergence 1A</div>
+          <div class="journal-save-badge" id="saved-s5a">✔ Saved</div>
         </div>
         <div class="journal-prompt">
-          [Placeholder — Convergence 1 Journal Prompt]<br>
-          <em>Example: "In your own words, explain how the motion of a car
-          before a crash is connected to the damage you see after the crash."</em>
+          <strong>What patterns do you notice across the test runs?</strong>
         </div>
         <textarea class="journal-textarea"
-                  id="journal-s5"
-                  placeholder="Write your connection here…"
-                  oninput="saveJournal('s5', this.value)"></textarea>
+                  id="journal-s5a"
+                  placeholder="Write your observations here…"
+                  oninput="saveJournal('s5a', this.value)"></textarea>
+      </div>
+
+      <!-- Navigation -->
+      <div class="nav-row">
+        <button class="btn btn-back" onclick="goBack()">← Back</button>
+        <button class="btn btn-continue" onclick="navigateTo('section-5b')">Continue →</button>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ===================================================
+       SECTION 5B — DP1 Convergence: What Does It Mean?
+  =================================================== -->
+  <section id="section-5b" class="section">
+    <div class="section-header convergence">
+      <div class="section-tag convergence">Section 5B · Convergence — DP1</div>
+      <div class="section-title">What Does It Mean?</div>
+    </div>
+    <div class="section-body convergence-body">
+
+      <div class="convergence-tag">🔵 Both Paths Converge Here</div>
+
+      <div class="narrative">
+        <p>The crashes did not just look different. They behaved differently.</p>
+        <p>A moving car has energy because it is in motion. During a crash, that energy does not disappear. It has to move, change, or be absorbed by different parts of the system.</p>
+        <p>When the car was moving faster before impact, there was more energy involved in the crash. That helps explain why the front of the car changed more in some tests than others.</p>
+        <p>But more visible damage does not always mean the car failed.</p>
+        <p>In many vehicles, parts of the front end are designed to bend, crush, or change shape during a crash. This can help absorb energy and reduce how much energy reaches the passengers.</p>
+        <p>So your team's next question is not just, "What changed?"</p>
+        <p>Your next question is: <strong>"Where did the energy go, and how did that affect passenger safety?"</strong></p>
+      </div>
+
+      <!-- Image placeholder -->
+      <div class="img-placeholder" style="min-height: 160px;">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M5 12h14m-4-4 4 4-4 4"/>
+          <circle cx="5" cy="12" r="2"/>
+          <circle cx="19" cy="12" r="2"/>
+        </svg>
+        <span>Image Placeholder: Energy Transfer in a Crash</span>
+      </div>
+
+      <!-- Field Journal -->
+      <div class="field-journal">
+        <div class="journal-header">
+          <div class="journal-icon">📓</div>
+          <div class="journal-label">Field Journal — Convergence 1B</div>
+          <div class="journal-save-badge" id="saved-s5b">✔ Saved</div>
+        </div>
+        <div class="journal-prompt">
+          <strong>How can the motion of the car before impact help explain what changed during the crash?</strong>
+        </div>
+        <textarea class="journal-textarea"
+                  id="journal-s5b"
+                  placeholder="Write your explanation here…"
+                  oninput="saveJournal('s5b', this.value)"></textarea>
       </div>
 
       <!-- Navigation -->
@@ -2682,7 +2815,8 @@ Cause and Effect; Systems and System Models; Energy and Matter</p>
     'section-3':  { num: 3,  title: 'Decision Point 1' },
     'section-4a': { num: 4,  title: 'Path A — Motion' },
     'section-4b': { num: 4,  title: 'Path B — Damage' },
-    'section-5':  { num: 5,  title: 'Convergence 1' },
+    'section-5a': { num: 5,  title: 'Convergence 1A — What Did We Notice?' },
+    'section-5b': { num: 5,  title: 'Convergence 1B — What Does It Mean?' },
     'section-6':  { num: 6,  title: 'Decision Point 2' },
     'section-7a': { num: 7,  title: 'Path A — Deformation' },
     'section-7b': { num: 7,  title: 'Path B — Surroundings' },
@@ -2900,7 +3034,8 @@ Cause and Effect; Systems and System Models; Energy and Matter</p>
       { key: 's2',  label: 'Section 2 — Welcome to Impact Motors' },
       { key: 's4a', label: 'Section 4A — Path A: Motion (DP1)' },
       { key: 's4b', label: 'Section 4B — Path B: Damage (DP1)' },
-      { key: 's5',  label: 'Section 5 — Convergence 1: Connecting Motion and Change' },
+      { key: 's5a', label: 'Section 5A — Convergence 1: What Did We Notice?' },
+      { key: 's5b', label: 'Section 5B — Convergence 1: What Does It Mean?' },
       { key: 's7a', label: 'Section 7A — Path A: Deformation (DP2)' },
       { key: 's7b', label: 'Section 7B — Path B: Surroundings (DP2)' },
       { key: 's8',  label: 'Section 8 — Convergence 2: Energy Did Not Disappear' },
