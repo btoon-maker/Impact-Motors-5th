@@ -1514,6 +1514,261 @@
     font-weight: 700;
     line-height: 1.5;
   }
+
+    /* =============================================
+       DIALOGUE BLOCK — spoken character text
+       Use for dialogue lines from Molly or others.
+       Italicized, indented, with an orange left bar.
+    ============================================= */
+    .dialogue-block {
+      font-style: italic;
+      border-left: 3px solid var(--orange);
+      padding: 10px 16px;
+      margin: 14px 0 14px 8px;
+      color: var(--off-white);
+      line-height: 1.75;
+      background: rgba(249,115,22,0.06);
+      border-radius: 0 var(--radius) var(--radius) 0;
+    }
+
+    /* Also apply to .dialogue-box (same intent, used in section 6) */
+    .dialogue-box {
+      font-style: italic;
+      border-left: 3px solid var(--orange);
+      padding: 10px 16px;
+      margin: 14px 0 14px 8px;
+      color: var(--off-white);
+      line-height: 1.75;
+      background: rgba(249,115,22,0.06);
+      border-radius: 0 var(--radius) var(--radius) 0;
+    }
+
+    /* =============================================
+       NARRATIVE ACTION — non-spoken action lines
+       Use for scene-setting / action descriptions.
+       Normal text, slight spacing, no border or box.
+    ============================================= */
+    .narrative-action {
+      font-style: normal;
+      color: var(--gray-mid);
+      font-size: 20px;
+      margin: 12px 0;
+      line-height: 1.65;
+    }
+
+    /* =============================================
+       SECTIONS 7A & 7B — Energy Analysis Interactives
+       Scoped under .embed-7a and .embed-7b to prevent
+       conflicts with each other and with .btn globally.
+    ============================================= */
+    .embed-7a,
+    .embed-7b {
+      margin-bottom: 24px;
+      font-family: var(--font-body);
+    }
+
+    .embed-7a .ea-energy-analysis,
+    .embed-7b .ea-energy-analysis {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(249,115,22,0.25);
+      border-radius: var(--radius);
+      padding: 24px 28px 28px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .embed-7a .ea-energy-analysis__heading,
+    .embed-7b .ea-energy-analysis__heading {
+      font-family: var(--font-head);
+      font-size: 21px;
+      font-weight: 800;
+      color: var(--off-white);
+      border-bottom: 3px solid var(--orange);
+      padding-bottom: 8px;
+      margin-bottom: 18px;
+    }
+
+    .embed-7a .ea-energy-analysis__callout,
+    .embed-7b .ea-energy-analysis__callout {
+      background: rgba(59,130,246,0.1);
+      border-left: 4px solid var(--blue);
+      border-radius: 4px;
+      padding: 12px 16px;
+      margin-bottom: 20px;
+      font-size: 18px;
+      color: var(--off-white);
+      line-height: 1.65;
+    }
+
+    .embed-7a .ea-energy-analysis__callout strong,
+    .embed-7b .ea-energy-analysis__callout strong {
+      display: block;
+      font-size: 13px;
+      color: var(--blue);
+      margin-bottom: 6px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      font-weight: 800;
+    }
+
+    .embed-7a .ea-run-prompt,
+    .embed-7b .ea-run-prompt {
+      font-size: 18px;
+      color: var(--gray-light);
+      margin-bottom: 10px;
+    }
+
+    .embed-7a .ea-energy-analysis__btn-group,
+    .embed-7b .ea-energy-analysis__btn-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    /* Base for interactive buttons — does NOT inherit lesson .btn */
+    .embed-7a .ea-btn,
+    .embed-7b .ea-btn {
+      font-family: var(--font-ui);
+      font-size: 16px;
+      font-weight: 700;
+      border-radius: var(--radius);
+      padding: 10px 22px;
+      cursor: pointer;
+      transition: background 0.18s, color 0.18s, box-shadow 0.18s;
+      letter-spacing: 0.5px;
+      border: none;
+      outline: none;
+    }
+
+    .embed-7a .ea-btn--run,
+    .embed-7b .ea-btn--run {
+      background: linear-gradient(135deg, #2E3D5C, #1F2A44);
+      color: var(--off-white);
+      border: 2px solid var(--blue);
+    }
+
+    .embed-7a .ea-btn--run:hover:not(:disabled),
+    .embed-7b .ea-btn--run:hover:not(:disabled) {
+      background: rgba(59,130,246,0.2);
+      box-shadow: 0 0 12px rgba(59,130,246,0.3);
+    }
+
+    .embed-7a .ea-btn--run.is-active,
+    .embed-7b .ea-btn--run.is-active {
+      background: var(--orange);
+      color: #fff;
+      border-color: var(--orange);
+      box-shadow: 0 0 12px rgba(249,115,22,0.35);
+    }
+
+    .embed-7a .ea-btn--run.is-active:hover,
+    .embed-7b .ea-btn--run.is-active:hover {
+      background: var(--orange-dim);
+    }
+
+    .embed-7a .ea-btn--analyse,
+    .embed-7b .ea-btn--analyse {
+      background: var(--orange);
+      color: #fff;
+      border: 2px solid var(--orange);
+      display: block;
+      width: 100%;
+      margin-top: 14px;
+      font-size: 17px;
+      padding: 13px 20px;
+      text-align: center;
+      box-shadow: 0 4px 16px rgba(249,115,22,0.3);
+    }
+
+    .embed-7a .ea-btn--analyse:hover,
+    .embed-7b .ea-btn--analyse:hover {
+      background: var(--orange-dim);
+      border-color: var(--orange-dim);
+    }
+
+    .embed-7a .ea-energy-analysis__table-wrap,
+    .embed-7b .ea-energy-analysis__table-wrap {
+      overflow-x: auto;
+      margin-top: 0;
+    }
+
+    .embed-7a .ea-energy-analysis__table,
+    .embed-7b .ea-energy-analysis__table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: var(--font-body);
+    }
+
+    .embed-7a .ea-energy-analysis__table th,
+    .embed-7b .ea-energy-analysis__table th {
+      background: var(--navy-dark);
+      color: var(--blue);
+      text-align: center;
+      font-family: var(--font-ui);
+      font-size: 14px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 10px 14px;
+      border-bottom: 2px solid rgba(59,130,246,0.3);
+    }
+
+    .embed-7a .ea-energy-analysis__table td,
+    .embed-7b .ea-energy-analysis__table td {
+      text-align: center;
+      vertical-align: top;
+      padding: 12px;
+      border: 1px solid rgba(255,255,255,0.07);
+      width: 50%;
+      background: rgba(0,0,0,0.12);
+    }
+
+    .embed-7a .ea-energy-analysis__table img,
+    .embed-7b .ea-energy-analysis__table img {
+      max-width: 100%;
+      height: auto;
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,0.1);
+      display: block;
+      margin: 0 auto;
+    }
+
+    .embed-7a .ea-energy-analysis__result,
+    .embed-7b .ea-energy-analysis__result {
+      margin-top: 18px;
+      text-align: center;
+    }
+
+    .embed-7a .ea-energy-analysis__result img,
+    .embed-7b .ea-energy-analysis__result img {
+      max-width: 100%;
+      height: auto;
+      border: 2px solid var(--orange);
+      border-radius: var(--radius);
+      display: block;
+      margin: 0 auto;
+      box-shadow: 0 0 16px rgba(249,115,22,0.2);
+    }
+
+    .embed-7a .ea-energy-analysis__result-label,
+    .embed-7b .ea-energy-analysis__result-label {
+      font-family: var(--font-ui);
+      font-size: 15px;
+      color: var(--gray-steel);
+      margin-top: 8px;
+      letter-spacing: 0.5px;
+    }
+
+    .embed-7a .is-hidden,
+    .embed-7b .is-hidden {
+      display: none !important;
+    }
+
+    @media (max-width: 600px) {
+      .embed-7a .ea-energy-analysis,
+      .embed-7b .ea-energy-analysis { padding: 16px 14px 20px; }
+      .embed-7a .ea-btn--run,
+      .embed-7b .ea-btn--run { font-size: 15px; padding: 9px 14px; }
+    }
   </style>
 </head>
 <body>
@@ -2530,15 +2785,64 @@ Cause and Effect; Systems and System Models; Energy and Matter</p>
 </p>
       </div>
 
-      <div class="img-placeholder" style="min-height: 200px;">
-        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-          <polyline points="14 2 14 8 20 8"/>
-          <line x1="12" y1="18" x2="12" y2="12"/>
-          <line x1="9" y1="15" x2="15" y2="15"/>
-        </svg>
-        <span>Placeholder — Crumple Zone Diagram / Animation</span>
-      </div>
+      <!-- ── SECTION 7A · DP2 PATH A INTERACTIVE ── -->
+      <div class="embed-7a" id="embed-7a">
+        <section class="ea-energy-analysis" aria-labelledby="ea7a-heading">
+
+          <h2 class="ea-energy-analysis__heading" id="ea7a-heading">
+            Crash Test Energy Analysis
+          </h2>
+
+          <div class="ea-energy-analysis__callout" role="note">
+            <strong>Variable Being Analyzed: Energy</strong>
+            This analysis looks for evidence that some crash energy moved into the car
+            and caused parts to change shape.
+          </div>
+
+          <p class="ea-run-prompt">Choose a crash test run to compare before and after impact:</p>
+
+          <div class="ea-energy-analysis__btn-group" role="group" aria-label="Select a test run — Path A">
+            <button class="ea-btn ea-btn--run" data-run="1" aria-pressed="false">Test Run 1</button>
+            <button class="ea-btn ea-btn--run" data-run="2" aria-pressed="false">Test Run 2</button>
+            <button class="ea-btn ea-btn--run" data-run="3" aria-pressed="false">Test Run 3</button>
+          </div>
+
+          <div id="ea7a-table-wrap" class="ea-energy-analysis__table-wrap is-hidden">
+            <table class="ea-energy-analysis__table" aria-label="Before and after impact comparison — Path A">
+              <thead>
+                <tr>
+                  <th scope="col">Before Impact</th>
+                  <th scope="col">After Impact</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <img id="ea7a-img-before"
+                         src="images/Energy_no impact.png"
+                         alt="Car before impact – no deformation visible" />
+                  </td>
+                  <td>
+                    <img id="ea7a-img-after" src="" alt="" />
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <button class="ea-btn ea-btn--analyse"
+                    id="ea7a-btn-analyse"
+                    aria-controls="ea7a-result">
+              Run Energy Analysis
+            </button>
+          </div>
+
+          <div id="ea7a-result" class="ea-energy-analysis__result is-hidden" aria-live="polite">
+            <img id="ea7a-img-analysis" src="" alt="" />
+            <p class="ea-energy-analysis__result-label" id="ea7a-label"></p>
+          </div>
+
+        </section>
+      </div><!-- /.embed-7a -->
 
       <div class="narrative">
 <p>
@@ -2613,15 +2917,64 @@ Cause and Effect; Systems and System Models; Energy and Matter</p>
       </div>
 
 
-      <!-- PLACEHOLDER: Supporting visuals -->
-      <div class="img-placeholder" style="min-height: 180px;">
-        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-          <circle cx="12" cy="12" r="10"/>
-          <circle cx="12" cy="12" r="6"/>
-          <circle cx="12" cy="12" r="2"/>
-        </svg>
-        <span>Placeholder — Crash Scene with Energy Overlay Options</span>
-      </div>
+      <!-- ── SECTION 7B · DP2 PATH B INTERACTIVE ── -->
+      <div class="embed-7b" id="embed-7b">
+        <section class="ea-energy-analysis" aria-labelledby="ea7b-heading">
+
+          <h2 class="ea-energy-analysis__heading" id="ea7b-heading">
+            Crash Test Energy Analysis
+          </h2>
+
+          <div class="ea-energy-analysis__callout" role="note">
+            <strong>Variable Being Analyzed: Energy</strong>
+            This analysis looks for evidence that some crash energy moved into the surroundings
+            during the crash.
+          </div>
+
+          <p class="ea-run-prompt">Choose a crash test run to compare before and after impact:</p>
+
+          <div class="ea-energy-analysis__btn-group" role="group" aria-label="Select a test run — Path B">
+            <button class="ea-btn ea-btn--run" data-run="1" aria-pressed="false">Test Run 1</button>
+            <button class="ea-btn ea-btn--run" data-run="2" aria-pressed="false">Test Run 2</button>
+            <button class="ea-btn ea-btn--run" data-run="3" aria-pressed="false">Test Run 3</button>
+          </div>
+
+          <div id="ea7b-table-wrap" class="ea-energy-analysis__table-wrap is-hidden">
+            <table class="ea-energy-analysis__table" aria-label="Before and after impact comparison — Path B">
+              <thead>
+                <tr>
+                  <th scope="col">Before Impact</th>
+                  <th scope="col">After Impact</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <img id="ea7b-img-before"
+                         src="images/Energy_no impact.png"
+                         alt="Car before impact – no deformation visible" />
+                  </td>
+                  <td>
+                    <img id="ea7b-img-after" src="" alt="" />
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <button class="ea-btn ea-btn--analyse"
+                    id="ea7b-btn-analyse"
+                    aria-controls="ea7b-result">
+              Run Energy Analysis
+            </button>
+          </div>
+
+          <div id="ea7b-result" class="ea-energy-analysis__result is-hidden" aria-live="polite">
+            <img id="ea7b-img-analysis" src="" alt="" />
+            <p class="ea-energy-analysis__result-label" id="ea7b-label"></p>
+          </div>
+
+        </section>
+      </div><!-- /.embed-7b -->
       
             <!-- PLACEHOLDER: Overlay toggle interaction -->
       <div class="narrative">
@@ -3692,6 +4045,132 @@ Cause and Effect; Systems and System Models; Energy and Matter</p>
       if (label && img) label.textContent = `Image not found: ${img.src.split('/').pop()}`;
     }
   }
+
+
+  // ── DP2 Path A — Section 7A Energy Analysis Interactive ───────
+
+  (function () {
+    'use strict';
+
+    const container7a = document.getElementById('embed-7a');
+    if (!container7a) return;
+
+    const afterImages7a = {
+      1: { src: 'images/Energy_TestRun1.png', alt: 'Car after impact in Test Run 1 – showing deformation from crash energy' },
+      2: { src: 'images/Energy_TestRun2.png', alt: 'Car after impact in Test Run 2 – showing deformation from crash energy' },
+      3: { src: 'images/Energy_TestRun3.png', alt: 'Car after impact in Test Run 3 – showing deformation from crash energy' }
+    };
+    const analysisImages7a = {
+      1: { src: 'images/Energy_TestRun1AnalysisA.png', alt: 'Energy analysis diagram for Test Run 1 – Path A findings' },
+      2: { src: 'images/Energy_TestRun2AnalysisA.png', alt: 'Energy analysis diagram for Test Run 2 – Path A findings' },
+      3: { src: 'images/Energy_TestRun3AnalysisA.png', alt: 'Energy analysis diagram for Test Run 3 – Path A findings' }
+    };
+
+    const runBtns7a   = container7a.querySelectorAll('.ea-btn--run');
+    const tableWrap7a = document.getElementById('ea7a-table-wrap');
+    const imgAfter7a  = document.getElementById('ea7a-img-after');
+    const result7a    = document.getElementById('ea7a-result');
+    const imgAna7a    = document.getElementById('ea7a-img-analysis');
+    const label7a     = document.getElementById('ea7a-label');
+    const btnAna7a    = document.getElementById('ea7a-btn-analyse');
+    let selectedRun7a = null;
+
+    function hideAnalysis7a() {
+      result7a.classList.add('is-hidden');
+      imgAna7a.src = '';
+      imgAna7a.alt = '';
+      label7a.textContent = '';
+    }
+
+    runBtns7a.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        const run = parseInt(btn.dataset.run, 10);
+        runBtns7a.forEach(function (b) {
+          b.classList.remove('is-active');
+          b.setAttribute('aria-pressed', 'false');
+        });
+        btn.classList.add('is-active');
+        btn.setAttribute('aria-pressed', 'true');
+        selectedRun7a = run;
+        imgAfter7a.src = afterImages7a[run].src;
+        imgAfter7a.alt = afterImages7a[run].alt;
+        tableWrap7a.classList.remove('is-hidden');
+        hideAnalysis7a();
+      });
+    });
+
+    btnAna7a.addEventListener('click', function () {
+      if (!selectedRun7a) return;
+      imgAna7a.src = analysisImages7a[selectedRun7a].src;
+      imgAna7a.alt = analysisImages7a[selectedRun7a].alt;
+      label7a.textContent = 'Energy Analysis – Test Run ' + selectedRun7a + ' (Path A)';
+      result7a.classList.remove('is-hidden');
+    });
+
+  }());
+
+
+  // ── DP2 Path B — Section 7B Energy Analysis Interactive ───────
+
+  (function () {
+    'use strict';
+
+    const container7b = document.getElementById('embed-7b');
+    if (!container7b) return;
+
+    const afterImages7b = {
+      1: { src: 'images/Energy_TestRun1.png', alt: 'Car after impact in Test Run 1 – showing energy in surroundings' },
+      2: { src: 'images/Energy_TestRun2.png', alt: 'Car after impact in Test Run 2 – showing energy in surroundings' },
+      3: { src: 'images/Energy_TestRun3.png', alt: 'Car after impact in Test Run 3 – showing energy in surroundings' }
+    };
+    const analysisImages7b = {
+      1: { src: 'images/Energy_TestRun1AnalysisB.png', alt: 'Energy analysis diagram for Test Run 1 – Path B findings' },
+      2: { src: 'images/Energy_TestRun2AnalysisB.png', alt: 'Energy analysis diagram for Test Run 2 – Path B findings' },
+      3: { src: 'images/Energy_TestRun3AnalysisB.png', alt: 'Energy analysis diagram for Test Run 3 – Path B findings' }
+    };
+
+    const runBtns7b   = container7b.querySelectorAll('.ea-btn--run');
+    const tableWrap7b = document.getElementById('ea7b-table-wrap');
+    const imgAfter7b  = document.getElementById('ea7b-img-after');
+    const result7b    = document.getElementById('ea7b-result');
+    const imgAna7b    = document.getElementById('ea7b-img-analysis');
+    const label7b     = document.getElementById('ea7b-label');
+    const btnAna7b    = document.getElementById('ea7b-btn-analyse');
+    let selectedRun7b = null;
+
+    function hideAnalysis7b() {
+      result7b.classList.add('is-hidden');
+      imgAna7b.src = '';
+      imgAna7b.alt = '';
+      label7b.textContent = '';
+    }
+
+    runBtns7b.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        const run = parseInt(btn.dataset.run, 10);
+        runBtns7b.forEach(function (b) {
+          b.classList.remove('is-active');
+          b.setAttribute('aria-pressed', 'false');
+        });
+        btn.classList.add('is-active');
+        btn.setAttribute('aria-pressed', 'true');
+        selectedRun7b = run;
+        imgAfter7b.src = afterImages7b[run].src;
+        imgAfter7b.alt = afterImages7b[run].alt;
+        tableWrap7b.classList.remove('is-hidden');
+        hideAnalysis7b();
+      });
+    });
+
+    btnAna7b.addEventListener('click', function () {
+      if (!selectedRun7b) return;
+      imgAna7b.src = analysisImages7b[selectedRun7b].src;
+      imgAna7b.alt = analysisImages7b[selectedRun7b].alt;
+      label7b.textContent = 'Energy Analysis – Test Run ' + selectedRun7b + ' (Path B)';
+      result7b.classList.remove('is-hidden');
+    });
+
+  }());
 
 
 </script>
