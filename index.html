@@ -2059,6 +2059,249 @@
       .s11-finish-row    { flex-direction: column; }
       .s11-finish-row .btn { width: 100%; text-align: center; }
     }
+
+    /* ============================================================
+       RESUME CODE PANEL
+    ============================================================ */
+    #resume-panel {
+      background: var(--navy-dark);
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      padding: 8px 24px;
+      display: none; /* shown by JS when not on section-0 */
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    #resume-panel .rp-label {
+      font-family: var(--font-ui);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--orange);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    #resume-panel .rp-code-display {
+      font-family: 'Courier New', monospace;
+      font-size: 17px;
+      font-weight: 800;
+      letter-spacing: 4px;
+      color: var(--off-white);
+      background: rgba(255,255,255,0.08);
+      padding: 4px 12px;
+      border-radius: 6px;
+      border: 1px solid rgba(255,255,255,0.15);
+      user-select: all;
+      cursor: text;
+    }
+    #resume-panel .rp-hint {
+      font-family: var(--font-ui);
+      font-size: 13px;
+      color: var(--gray-steel);
+      flex: 1;
+    }
+    #resume-panel .rp-divider {
+      width: 1px; height: 22px;
+      background: rgba(255,255,255,0.12);
+      flex-shrink: 0;
+    }
+    #resume-panel .rp-enter-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+    #resume-panel .rp-enter-label {
+      font-family: var(--font-ui);
+      font-size: 13px;
+      color: var(--gray-mid);
+    }
+    #resume-code-input {
+      font-family: 'Courier New', monospace;
+      font-size: 15px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      width: 100px;
+      padding: 4px 8px;
+      border-radius: 6px;
+      border: 1px solid rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.06);
+      color: var(--off-white);
+      outline: none;
+    }
+    #resume-code-input::placeholder { letter-spacing: 1px; color: var(--gray-steel); text-transform: none; }
+    #resume-code-input:focus { border-color: var(--blue); }
+    .rp-load-btn {
+      padding: 4px 12px;
+      background: var(--blue);
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-family: var(--font-ui);
+      font-size: 13px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background var(--transition);
+    }
+    .rp-load-btn:hover { background: var(--blue-dim); }
+    @media (max-width: 700px) {
+      #resume-panel { flex-direction: column; align-items: flex-start; gap: 8px; }
+      #resume-panel .rp-divider { width: 40px; height: 1px; }
+    }
+
+    /* ============================================================
+       EXPORT MODAL
+    ============================================================ */
+    .im-modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.65);
+      z-index: 9000;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+    .im-modal-overlay.open { display: flex; }
+    .im-modal-box {
+      background: var(--navy);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-top: 4px solid var(--orange);
+      border-radius: var(--radius-lg);
+      padding: 32px 36px;
+      max-width: 460px;
+      width: 100%;
+      box-shadow: 0 16px 60px rgba(0,0,0,0.7);
+      animation: fadeIn 0.2s ease;
+    }
+    .im-modal-title {
+      font-family: var(--font-head);
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--off-white);
+      margin-bottom: 14px;
+    }
+    .im-modal-body {
+      font-size: 18px;
+      color: var(--gray-light);
+      line-height: 1.65;
+      margin-bottom: 18px;
+    }
+    .im-modal-label {
+      font-family: var(--font-ui);
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--gray-mid);
+      margin-bottom: 6px;
+      display: block;
+    }
+    .im-modal-input {
+      width: 100%;
+      padding: 10px 12px;
+      font-family: var(--font-body);
+      font-size: 18px;
+      color: var(--navy);
+      background: #fff;
+      border: 2px solid var(--gray-light);
+      border-radius: 6px;
+      outline: none;
+      margin-bottom: 10px;
+      transition: border-color var(--transition);
+    }
+    .im-modal-input:focus { border-color: var(--blue); }
+    .im-modal-preview {
+      font-family: var(--font-ui);
+      font-size: 14px;
+      color: var(--gray-steel);
+      margin-bottom: 20px;
+    }
+    .im-modal-preview span {
+      font-weight: bold;
+      color: var(--off-white);
+      font-family: 'Courier New', monospace;
+    }
+    .im-modal-btns {
+      display: flex;
+      gap: 10px;
+      justify-content: flex-end;
+    }
+    .im-modal-btns .btn-cancel {
+      background: transparent;
+      color: var(--gray-mid);
+      border: 2px solid rgba(107,114,128,0.4);
+      padding: 10px 22px;
+      border-radius: var(--radius);
+      font-family: var(--font-ui);
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+    .im-modal-btns .btn-cancel:hover { color: var(--off-white); border-color: var(--gray-steel); }
+    .im-modal-btns .btn-export-go {
+      background: var(--orange);
+      color: #fff;
+      border: none;
+      padding: 10px 22px;
+      border-radius: var(--radius);
+      font-family: var(--font-ui);
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background var(--transition);
+    }
+    .im-modal-btns .btn-export-go:hover { background: var(--orange-dim); }
+
+    /* Confirm modal (restart) */
+    .im-confirm-box {
+      background: var(--navy);
+      border: 1px solid rgba(249,115,22,0.3);
+      border-top: 4px solid var(--orange);
+      border-radius: var(--radius-lg);
+      padding: 28px 32px;
+      max-width: 400px;
+      width: 100%;
+      box-shadow: 0 16px 60px rgba(0,0,0,0.7);
+      animation: fadeIn 0.2s ease;
+    }
+    .im-confirm-box .im-modal-title { color: var(--orange); }
+    .im-confirm-box .im-modal-btns .btn-confirm-yes {
+      background: var(--orange);
+      color: #fff;
+      border: none;
+      padding: 10px 22px;
+      border-radius: var(--radius);
+      font-family: var(--font-ui);
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background var(--transition);
+    }
+    .im-confirm-box .im-modal-btns .btn-confirm-yes:hover { background: var(--orange-dim); }
+
+    /* ============================================================
+       TEXT-TO-SPEECH LISTEN BUTTON
+    ============================================================ */
+    .tts-listen-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 6px 14px;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 20px;
+      font-family: var(--font-ui);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--gray-mid);
+      cursor: pointer;
+      transition: background var(--transition), color var(--transition), border-color var(--transition);
+      margin-bottom: 18px;
+      letter-spacing: 0.3px;
+    }
+    .tts-listen-btn:hover { background: rgba(255,255,255,0.13); color: var(--off-white); border-color: rgba(255,255,255,0.3); }
+    .tts-listen-btn.tts-active { background: rgba(249,115,22,0.15); border-color: rgba(249,115,22,0.5); color: var(--orange); }
+    .tts-listen-btn .tts-icon { font-size: 15px; }
+    @media (max-width: 600px) { .tts-listen-btn { font-size: 13px; padding: 5px 11px; } }
   </style>
 </head>
 <body>
@@ -2083,8 +2326,8 @@
   </div>
   <!-- Utility buttons — hidden on Section 0 -->
   <div id="util-buttons">
-    <button class="btn-util" onclick="exportJournal()" title="Download your field journal">⬇ Export Journal</button>
-    <button class="btn-util btn-util-danger" onclick="restartLesson()" title="Clear progress and restart">↺ Restart</button>
+    <button class="btn-util" onclick="exportModalOpen()" title="Download your field journal">⬇ Export Journal</button>
+    <button class="btn-util btn-util-danger" onclick="confirmModalOpen()" title="Clear progress and restart">↺ Restart</button>
   </div>
 </header>
 
@@ -2107,6 +2350,22 @@
         <div class="mp-step-val" id="mp-dp2-val">Awaiting your choice…</div>
       </div>
     </div>
+  </div>
+</div>
+
+
+<!-- ============================================================
+     RESUME CODE PANEL — shown on all sections except section-0
+============================================================ -->
+<div id="resume-panel" role="complementary" aria-label="Resume code panel">
+  <span class="rp-label">📌 Your Save Code:</span>
+  <span class="rp-code-display" id="rp-code-display" title="Write this code down to resume later">——————</span>
+  <span class="rp-hint">Write this down to resume your investigation later on this device.</span>
+  <div class="rp-divider"></div>
+  <div class="rp-enter-row">
+    <span class="rp-enter-label">Resume a code:</span>
+    <input type="text" id="resume-code-input" maxlength="6" placeholder="Enter code" aria-label="Enter resume code" />
+    <button class="rp-load-btn" onclick="resumeCodeLoad()">Load</button>
   </div>
 </div>
 
@@ -3595,7 +3854,50 @@ Cause and Effect; Systems and System Models; Energy and Matter</p>
     </div>
   </section>
 
+
 </main><!-- /#app -->
+
+<!-- ============================================================
+     EXPORT JOURNAL MODAL
+============================================================ -->
+<div class="im-modal-overlay" id="export-modal" role="dialog" aria-modal="true" aria-labelledby="export-modal-title">
+  <div class="im-modal-box">
+    <div class="im-modal-title" id="export-modal-title">Export Your Field Journal</div>
+    <div class="im-modal-body">
+      Type your name or identifier below.<br>
+      <strong>ImpactMotorsJournal</strong> will be added automatically to the end of the filename.
+    </div>
+    <label class="im-modal-label" for="export-name-input">Your name or ID (optional):</label>
+    <input class="im-modal-input" type="text" id="export-name-input" placeholder="e.g. Toon"
+           oninput="exportModalPreview()" aria-label="Your name or ID for the filename" />
+    <div class="im-modal-preview">
+      Filename: <span id="export-filename-preview">ImpactMotorsJournal.txt</span>
+    </div>
+    <div class="im-modal-btns">
+      <button class="btn-cancel" onclick="exportModalClose()">Cancel</button>
+      <button class="btn-export-go" onclick="exportModalConfirm()">Export</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     RESTART CONFIRM MODAL
+============================================================ -->
+<div class="im-modal-overlay" id="confirm-modal" role="dialog" aria-modal="true" aria-labelledby="confirm-modal-title">
+  <div class="im-confirm-box">
+    <div class="im-modal-title" id="confirm-modal-title">⚠ Restart Lesson?</div>
+    <div class="im-modal-body">
+      This will permanently clear all your journal entries, decisions, brief responses, and save code.<br><br>
+      <strong>This cannot be undone.</strong>
+    </div>
+    <div class="im-modal-btns">
+      <button class="btn-cancel" onclick="confirmModalClose()">Cancel</button>
+      <button class="btn-confirm-yes" onclick="confirmModalYes()">Yes, Restart</button>
+    </div>
+  </div>
+</div>
+
+
 
 
 <!-- ============================================================
@@ -3652,10 +3954,17 @@ Cause and Effect; Systems and System Models; Energy and Matter</p>
 
   // ── Initialise on page load ──────────────────────────────────
   window.addEventListener('DOMContentLoaded', () => {
+    timeTrackingInit();
     loadFromStorage();
     restoreJournalFields();
     restoreBriefFields();
-    showSection('section-0');
+    resumeCodeInit();
+    ttsInit();
+
+    // Restore to the last active section (or section-0 if none saved)
+    const restoreTarget = (typeof savedCurrentSection === 'string' && savedCurrentSection)
+      ? savedCurrentSection : 'section-0';
+    showSection(restoreTarget);
   });
 
 
@@ -3701,16 +4010,20 @@ Cause and Effect; Systems and System Models; Energy and Matter</p>
    * @param {string} sectionId
    */
   function showSection(sectionId) {
+    ttsStop(); // Stop any active speech when changing pages
+    timeTrackingLeave(); // Record time on previous section
+
     // Hide all sections
     document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-    
+
     // Show target
     const target = document.getElementById(sectionId);
     if (target) {
       target.classList.add('active');
       currentSection = sectionId;
       updateProgress(sectionId);
-      // Scroll to top of page smoothly
+      timeTrackingEnter(sectionId);
+      saveToStorage();
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   }
@@ -3723,10 +4036,12 @@ Cause and Effect; Systems and System Models; Energy and Matter</p>
     const meta = SECTION_META[sectionId] || { num: 0, title: '' };
     const isLanding = (sectionId === 'section-0');
 
-    // Toggle progress bar, util buttons, and mission path strip visibility
+    // Toggle progress bar, util buttons, mission path, and resume panel visibility
     document.getElementById('progress-wrap').style.display  = isLanding ? 'none' : '';
     document.getElementById('util-buttons').style.display   = isLanding ? 'none' : '';
     document.getElementById('mission-path').style.display   = isLanding ? 'none' : '';
+    const resumePanel = document.getElementById('resume-panel');
+    if (resumePanel) resumePanel.style.display = isLanding ? 'none' : 'flex';
 
     if (!isLanding) {
       const pct = Math.round((meta.num / TOTAL_SECTIONS) * 100);
@@ -3786,20 +4101,50 @@ Cause and Effect; Systems and System Models; Energy and Matter</p>
 
   function saveToStorage() {
     try {
-      const payload = { decisions, journalData };
+      const payload = {
+        decisions,
+        journalData,
+        currentSection,
+        navigationHistory,
+        sectionTimings,
+        resumeCode,
+        csTestLog,
+        csObservations,
+        dp2aSelectedRun,
+        dp2aAnalysisRun,
+        dp2bSelectedRun,
+        dp2bAnalysisRun,
+      };
       localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
+      // Also snapshot under the resume code key for cross-session use
+      if (resumeCode) {
+        localStorage.setItem('sins_im_snap_' + resumeCode, JSON.stringify(payload));
+      }
     } catch(e) {
       console.warn('localStorage save failed:', e);
     }
   }
+
+  // Track the section to restore on load
+  let savedCurrentSection = null;
 
   function loadFromStorage() {
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
       if (!raw) return;
       const payload = JSON.parse(raw);
-      if (payload.decisions)   decisions   = payload.decisions;
-      if (payload.journalData) journalData = payload.journalData;
+      if (payload.decisions)          decisions          = payload.decisions;
+      if (payload.journalData)        journalData        = payload.journalData;
+      if (payload.currentSection)     savedCurrentSection = payload.currentSection;
+      if (payload.navigationHistory)  navigationHistory  = payload.navigationHistory;
+      if (payload.sectionTimings)     sectionTimings     = payload.sectionTimings;
+      if (payload.resumeCode)         resumeCode         = payload.resumeCode;
+      if (payload.csTestLog)          csTestLog          = payload.csTestLog;
+      if (payload.csObservations)     csObservations     = payload.csObservations;
+      if (payload.dp2aSelectedRun !== undefined) dp2aSelectedRun = payload.dp2aSelectedRun;
+      if (payload.dp2aAnalysisRun !== undefined) dp2aAnalysisRun = payload.dp2aAnalysisRun;
+      if (payload.dp2bSelectedRun !== undefined) dp2bSelectedRun = payload.dp2bSelectedRun;
+      if (payload.dp2bAnalysisRun !== undefined) dp2bAnalysisRun = payload.dp2bAnalysisRun;
     } catch(e) {
       console.warn('localStorage load failed:', e);
     }
@@ -3812,82 +4157,186 @@ Cause and Effect; Systems and System Models; Energy and Matter</p>
    * Build and download a plain-text export of the student's
    * full Field Journal, decisions made, and a timestamp.
    */
-  function exportJournal() {
+  // ── Export Modal ─────────────────────────────────────────────
+
+  function exportModalOpen() {
+    document.getElementById('export-name-input').value = '';
+    document.getElementById('export-filename-preview').textContent = 'ImpactMotorsJournal.txt';
+    document.getElementById('export-modal').classList.add('open');
+    setTimeout(() => document.getElementById('export-name-input').focus(), 100);
+  }
+
+  function exportModalClose() {
+    document.getElementById('export-modal').classList.remove('open');
+  }
+
+  function exportModalPreview() {
+    const name = document.getElementById('export-name-input').value.trim();
+    const preview = name ? name + 'ImpactMotorsJournal.txt' : 'ImpactMotorsJournal.txt';
+    document.getElementById('export-filename-preview').textContent = preview;
+  }
+
+  function exportModalConfirm() {
+    const name = document.getElementById('export-name-input').value.trim();
+    exportModalClose();
+    doExportJournal(name);
+  }
+
+  function buildExportText(studentId) {
     const now       = new Date();
     const timestamp = now.toLocaleString();
-    const lines     = [];
+    const L         = [];
+    const line      = s => L.push(s);
+    const blank     = ()  => L.push('');
+    const rule      = ()  => L.push('======================================================');
+    const dash      = ()  => L.push('------------------------------------------------------');
 
-    // Header
-    lines.push('======================================================');
-    lines.push('  STORIES IN SCIENCE — FIELD JOURNAL EXPORT');
-    lines.push('  Lesson: Impact Motors: Crash Investigation');
-    lines.push('  Grade 5 | Impact Motors Investigation');
-    lines.push('======================================================');
-    lines.push('');
-    lines.push('Exported: ' + timestamp);
-    lines.push('');
+    rule(); line('  Impact Motors: Crash Investigation');
+    line('  Field Journal Export');
+    line('  Generated: ' + timestamp); rule(); blank();
 
-    // Decisions
-    lines.push('------------------------------------------------------');
-    lines.push('  DECISIONS MADE');
-    lines.push('------------------------------------------------------');
-    lines.push('Decision Point 1 (Where Do You Begin?): ' +
-      (decisions.dp1 ? 'Path ' + decisions.dp1 +
-        (decisions.dp1 === 'A' ? ' — What Was Happening Before the Crash?' : ' — What Changed During the Crash?')
-      : '(not recorded)'));
-    lines.push('Decision Point 2 (Where Did the Energy Go?): ' +
-      (decisions.dp2 ? 'Path ' + decisions.dp2 +
-        (decisions.dp2 === 'A' ? ' — Into the Car' : ' — Into the Surroundings')
-      : '(not recorded)'));
-    lines.push('');
+    // Student ID
+    dash(); line('  STUDENT IDENTIFIER'); dash();
+    line('Name / ID: ' + (studentId || 'Not provided')); blank();
 
-    // Journal entries in section order
-    const journalOrder = [
-      { key: 's2',      label: 'Section 2 — Welcome to Impact Motors' },
-      { key: 's4a',     label: 'Section 4A — Path A: Motion (DP1)' },
-      { key: 's4b',     label: 'Section 4B — Path B: Damage (DP1)' },
-      { key: 's5a',     label: 'Section 5A — Convergence 1: What Did We Notice?' },
-      { key: 's5b',     label: 'Section 5B — Convergence 1: What Does It Mean?' },
-      { key: 's7a',     label: 'Section 8A — Path A: Deformation (DP2)' },
-      { key: 's7b',     label: 'Section 8B — Path B: Surroundings (DP2)' },
-      { key: 'brief_claim',  label: 'Section 10 — Scientific Brief: Claim' },
-      { key: 'brief_evcar',  label: 'Section 10 — Scientific Brief: Evidence from the Car' },
-      { key: 'brief_evsurr', label: 'Section 10 — Scientific Brief: Evidence from the Surroundings' },
-      { key: 'brief_expl',   label: 'Section 10 — Scientific Brief: Scientific Explanation' },
+    // Time tracking
+    dash(); line('  TIME TRACKING'); dash();
+    const totalSec = Object.values(sectionTimings).reduce((a,b)=>a+b,0);
+    line('Total time in lesson: ' + fmtTime(totalSec));
+    blank();
+    const sectionNames = {
+      'section-0': 'Landing Page', 'section-1': 'Start Investigation',
+      'section-2': 'Welcome to Impact Motors', 'section-3': 'Decision Point 1',
+      'section-4a': 'Path A — What Was Happening Before the Crash?',
+      'section-4b': 'Path B — What Changed During the Crash?',
+      'section-5a': 'Convergence — What Did We Notice?',
+      'section-5b': 'Convergence — What Does It Mean?',
+      'section-5c': 'What Are We Wondering?',
+      'section-6': 'Decision Point 2 — Where Did the Energy Go?',
+      'section-7a': 'Path A — Follow the Energy Into the Car',
+      'section-7b': 'Path B — Follow the Energy Into the Surroundings',
+      'section-8': 'Convergence — What Did We Discover About Energy?',
+      'section-9': 'Sharing Scientific Insights with the Engineering Team',
+      'section-10': 'Mission Complete',
+    };
+    Object.entries(sectionTimings).forEach(([id, secs]) => {
+      if (secs > 0) line('  ' + (sectionNames[id] || id) + ': ' + fmtTime(secs));
+    });
+    blank();
+
+    // Decision choices
+    dash(); line('  MISSION PATH — DECISION CHOICES'); dash();
+    line('Decision Point 1 — Where Will You Begin?');
+    if (decisions.dp1 === 'A') line('  ✓ What Was Happening Before the Crash? (Motion path)');
+    else if (decisions.dp1 === 'B') line('  ✓ What Changed During the Crash? (Damage path)');
+    else line('  (not yet chosen)');
+    blank();
+    line('Decision Point 2 — Where Did the Energy Go?');
+    if (decisions.dp2 === 'A') line('  ✓ Follow the Energy Into the Car');
+    else if (decisions.dp2 === 'B') line('  ✓ Follow the Energy Into the Surroundings');
+    else line('  (not yet chosen)');
+    blank();
+
+    // Field journals with prompts
+    dash(); line('  FIELD JOURNAL RESPONSES'); dash(); blank();
+    const journals = [
+      { key: 's4a', section: 'Section 4A — Path A: Motion', prompt: 'What did you notice about how the car moved in each test run? How did the motion differ between the three test runs? What patterns do you notice?' },
+      { key: 's4b', section: 'Section 4B — Path B: Damage', prompt: 'What changes do you observe during each crash? How do the changes differ between the test runs? What patterns do you notice about where the damage occurs?' },
+      { key: 's5a', section: 'Section 5A — What Did We Notice?', prompt: 'What patterns do you notice across the test runs? Use evidence from at least two test runs.' },
+      { key: 's5b', section: 'Section 5B — What Does It Mean?', prompt: 'What did the Crash Science Briefing help you understand about why some test runs showed more change than others? Use evidence from the test runs.' },
+      { key: 's7a', section: 'Section 7A — Path A: Into the Car', prompt: 'What evidence do you see that energy moved into the car during the crash? Use details from at least one test run.' },
+      { key: 's7b', section: 'Section 7B — Path B: Into the Surroundings', prompt: 'What evidence do you see that energy spread into the surroundings during the crash? Use details from at least one test run.' },
     ];
-
-    lines.push('------------------------------------------------------');
-    lines.push('  JOURNAL RESPONSES');
-    lines.push('------------------------------------------------------');
-    lines.push('');
-
-    journalOrder.forEach(({ key, label }) => {
-      const entry = journalData[key];
-      // Only include sections that were visited (have an entry) or list all
-      lines.push('[ ' + label + ' ]');
-      if (entry && entry.trim() !== '') {
-        lines.push(entry.trim());
-      } else {
-        lines.push('(no response recorded)');
-      }
-      lines.push('');
+    journals.forEach(({key, section, prompt}) => {
+      line('[ ' + section + ' ]');
+      line('Prompt: ' + prompt);
+      const val = journalData[key];
+      line('Response: ' + (val && val.trim() ? val.trim() : '[No response]'));
+      blank();
     });
 
-    lines.push('======================================================');
-    lines.push('  END OF FIELD JOURNAL');
-    lines.push('======================================================');
+    // DP1 Path A test data log
+    dash(); line('  DP1 PATH A — TEST DATA LOG (Motion Analysis)'); dash();
+    [1,2,3].forEach(n => {
+      line('Test Run ' + n + ':');
+      line('  Status: ' + (csTestLog[n] ? 'Replayed at ' + csTestLog[n] : 'Not yet replayed'));
+      const obs = csObservations[n];
+      line('  Observation: ' + (obs && obs.trim() ? obs.trim() : '[No observation recorded]'));
+    });
+    blank();
 
-    // Create and trigger download
-    const blob = new Blob([lines.join('\n')], { type: 'text/plain; charset=utf-8' });
-    const url  = URL.createObjectURL(blob);
-    const a    = document.createElement('a');
-    a.href     = url;
-    a.download = 'FieldJournal_ImpactMotors_CrashInvestigation.txt';
+    // DP2 Energy Analysis interactions
+    dash(); line('  DP2 ENERGY ANALYSIS INTERACTIONS'); dash();
+    line('Path A (Into the Car):');
+    line('  Test run selected: ' + (dp2aSelectedRun ? 'Test Run ' + dp2aSelectedRun : 'None'));
+    line('  Run Energy Analysis clicked: ' + (dp2aAnalysisRun ? 'Yes' : 'No'));
+    blank();
+    line('Path B (Into the Surroundings):');
+    line('  Test run selected: ' + (dp2bSelectedRun ? 'Test Run ' + dp2bSelectedRun : 'None'));
+    line('  Run Energy Analysis clicked: ' + (dp2bAnalysisRun ? 'Yes' : 'No'));
+    blank();
+
+    // Scientific Brief
+    dash(); line('  SCIENTIFIC BRIEF BUILDER'); dash(); blank();
+    const bFields = [
+      { key: 'brief_claim',  label: 'Claim', prompt: 'Where does the energy go during a crash?' },
+      { key: 'brief_evcar',  label: 'Evidence from the Car', prompt: 'What evidence shows that energy affected the car?' },
+      { key: 'brief_evsurr', label: 'Evidence from the Surroundings', prompt: 'What evidence shows that energy moved into the surroundings?' },
+      { key: 'brief_expl',   label: 'Scientific Explanation', prompt: 'How does motion affect energy transfer during the crash?' },
+    ];
+    bFields.forEach(({key, label, prompt}) => {
+      line(label + ':');
+      line('  Prompt: ' + prompt);
+      const val = journalData[key];
+      line('  Response: ' + (val && val.trim() ? val.trim() : '[No response]'));
+      blank();
+    });
+
+    // Generated brief
+    dash(); line('  COMPLETED SCIENTIFIC BRIEF'); dash(); blank();
+    if (journalData['brief_generated']) {
+      line('IMPACT MOTORS');
+      line('Crash Test Scientific Brief');
+      blank();
+      line('Prepared by: Junior Crash Test Scientist Team');
+      blank();
+      line('Claim:');
+      line(journalData['brief_claim'] || '(not completed)'); blank();
+      line('Evidence from the Car:');
+      line(journalData['brief_evcar'] || '(not completed)'); blank();
+      line('Evidence from the Surroundings:');
+      line(journalData['brief_evsurr'] || '(not completed)'); blank();
+      line('Scientific Explanation:');
+      line(journalData['brief_expl'] || '(not completed)'); blank();
+      line('Final Message to the Engineering Team:');
+      line('The crash test evidence shows that energy does not disappear during a crash.');
+      line('Understanding where and how energy is transferred can help engineers design safer vehicles.');
+    } else {
+      line('[Scientific brief not created yet]');
+    }
+    blank();
+
+    rule(); line('  END OF FIELD JOURNAL'); rule();
+    return L.join('\n');
+  }
+
+  function doExportJournal(studentId) {
+    const text     = buildExportText(studentId);
+    const name     = (studentId || '').trim();
+    const filename = name ? name + 'ImpactMotorsJournal.txt' : 'ImpactMotorsJournal.txt';
+    const blob     = new Blob([text], { type: 'text/plain; charset=utf-8' });
+    const url      = URL.createObjectURL(blob);
+    const a        = document.createElement('a');
+    a.href         = url;
+    a.download     = filename;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
   }
+
+  // Keep legacy name so any old inline onclick="exportJournal()" still works
+  function exportJournal() { exportModalOpen(); }
 
 
   // ── Restart Lesson ───────────────────────────────────────────
@@ -3895,16 +4344,61 @@ Cause and Effect; Systems and System Models; Energy and Matter</p>
   /**
    * Clear all stored progress and return to Section 0.
    */
-  function restartLesson() {
-    if (!confirm('This will clear all your journal entries and decisions. Are you sure?')) return;
+  // ── Restart Confirm Modal ────────────────────────────────────
+
+  function confirmModalOpen() {
+    document.getElementById('confirm-modal').classList.add('open');
+  }
+
+  function confirmModalClose() {
+    document.getElementById('confirm-modal').classList.remove('open');
+  }
+
+  function confirmModalYes() {
+    confirmModalClose();
+    doRestartLesson();
+  }
+
+  function doRestartLesson() {
+    ttsStop();
+    // Clear all localStorage keys for this lesson
     try { localStorage.removeItem(STORAGE_KEY); } catch(e) {}
-    decisions   = {};
-    journalData = {};
+    // Clear any resume code snapshots (only the active one)
+    if (resumeCode) {
+      try { localStorage.removeItem('sins_im_snap_' + resumeCode); } catch(e) {}
+    }
+    // Clear carsim storage
+    try { localStorage.removeItem(CS_LS_LOG_KEY); } catch(e) {}
+    try { localStorage.removeItem(CS_LS_OBSERVATIONS_KEY); } catch(e) {}
+
+    // Reset all in-memory state
+    decisions         = {};
+    journalData       = {};
     navigationHistory = [];
-    // Clear all textareas
-    document.querySelectorAll('.journal-textarea').forEach(el => el.value = '');
+    sectionTimings    = {};
+    resumeCode        = null;
+    csTestLog         = { 1: null, 2: null, 3: null };
+    csObservations    = { 1: '', 2: '', 3: '' };
+    dp2aSelectedRun   = null;
+    dp2aAnalysisRun   = false;
+    dp2bSelectedRun   = null;
+    dp2bAnalysisRun   = false;
+    savedCurrentSection = null;
+
+    // Clear all textareas and brief fields
+    document.querySelectorAll('.journal-textarea, .s10-brief-textarea').forEach(el => el.value = '');
+    // Clear carsim observation textareas (dynamically rendered)
+    document.querySelectorAll('.cs-obs-textarea').forEach(el => el.value = '');
+    const briefOutput = document.getElementById('brief-output');
+    if (briefOutput) briefOutput.classList.remove('visible');
+
+    csResetCarToStart();
+    csRenderDataLog();
     navigateTo('section-0');
   }
+
+  // Keep old name working for any stray references
+  function restartLesson() { confirmModalOpen(); }
 
 
   // ── Objectives Accordion ──────────────────────────────────────
@@ -4232,6 +4726,10 @@ Cause and Effect; Systems and System Models; Energy and Matter</p>
       const el = document.getElementById(id);
       if (el && journalData['brief_' + key]) el.value = journalData['brief_' + key];
     });
+    // Re-generate brief if it was previously created
+    if (journalData['brief_generated']) {
+      generateBrief();
+    }
   }
 
   function generateBrief() {
@@ -4256,6 +4754,9 @@ Cause and Effect; Systems and System Models; Energy and Matter</p>
       output.classList.add('visible');
       output.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
+    // Mark brief as generated so export and restore can include it
+    journalData['brief_generated'] = true;
+    saveToStorage();
   }
 
 
@@ -4307,10 +4808,13 @@ Cause and Effect; Systems and System Models; Energy and Matter</p>
         btn.classList.add('is-active');
         btn.setAttribute('aria-pressed', 'true');
         selectedRun7a = run;
+        dp2aSelectedRun = run; // expose for export/save
         imgAfter7a.src = afterImages7a[run].src;
         imgAfter7a.alt = afterImages7a[run].alt;
         tableWrap7a.classList.remove('is-hidden');
         hideAnalysis7a();
+        dp2aAnalysisRun = false;
+        saveToStorage();
       });
     });
 
@@ -4320,6 +4824,8 @@ Cause and Effect; Systems and System Models; Energy and Matter</p>
       imgAna7a.alt = analysisImages7a[selectedRun7a].alt;
       label7a.textContent = 'Energy Analysis – Test Run ' + selectedRun7a + ' (Path A)';
       result7a.classList.remove('is-hidden');
+      dp2aAnalysisRun = true;
+      saveToStorage();
     });
 
   }());
@@ -4370,10 +4876,13 @@ Cause and Effect; Systems and System Models; Energy and Matter</p>
         btn.classList.add('is-active');
         btn.setAttribute('aria-pressed', 'true');
         selectedRun7b = run;
+        dp2bSelectedRun = run; // expose for export/save
         imgAfter7b.src = afterImages7b[run].src;
         imgAfter7b.alt = afterImages7b[run].alt;
         tableWrap7b.classList.remove('is-hidden');
         hideAnalysis7b();
+        dp2bAnalysisRun = false;
+        saveToStorage();
       });
     });
 
@@ -4383,9 +4892,219 @@ Cause and Effect; Systems and System Models; Energy and Matter</p>
       imgAna7b.alt = analysisImages7b[selectedRun7b].alt;
       label7b.textContent = 'Energy Analysis – Test Run ' + selectedRun7b + ' (Path B)';
       result7b.classList.remove('is-hidden');
+      dp2bAnalysisRun = true;
+      saveToStorage();
     });
 
   }());
+
+
+
+  // ============================================================
+  // RESUME CODE SYSTEM
+  // ============================================================
+
+  let resumeCode = null; // 6-char alphanumeric code for current session
+
+  function resumeCodeGenerate() {
+    const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'; // no ambiguous chars
+    let code = '';
+    for (let i = 0; i < 6; i++) code += chars[Math.floor(Math.random() * chars.length)];
+    return code;
+  }
+
+  function resumeCodeInit() {
+    // Generate a code if we don't have one yet
+    if (!resumeCode) {
+      resumeCode = resumeCodeGenerate();
+      saveToStorage();
+    }
+    const display = document.getElementById('rp-code-display');
+    if (display) display.textContent = resumeCode;
+  }
+
+  function resumeCodeLoad() {
+    const input = document.getElementById('resume-code-input');
+    if (!input) return;
+    const code = input.value.trim().toUpperCase();
+    if (code.length < 4) {
+      alert('Please enter your full save code (at least 4 characters).');
+      return;
+    }
+    const raw = localStorage.getItem('sins_im_snap_' + code);
+    if (!raw) {
+      alert('No saved progress found for code "' + code + '".
+Make sure you're on the same device and browser where you started.');
+      return;
+    }
+    try {
+      const payload = JSON.parse(raw);
+      // Load all state from snapshot
+      if (payload.decisions)          decisions          = payload.decisions;
+      if (payload.journalData)        journalData        = payload.journalData;
+      if (payload.currentSection)     savedCurrentSection = payload.currentSection;
+      if (payload.navigationHistory)  navigationHistory  = payload.navigationHistory;
+      if (payload.sectionTimings)     sectionTimings     = payload.sectionTimings;
+      if (payload.resumeCode)         resumeCode         = payload.resumeCode;
+      if (payload.csTestLog)          csTestLog          = payload.csTestLog;
+      if (payload.csObservations)     csObservations     = payload.csObservations;
+      if (payload.dp2aSelectedRun !== undefined) dp2aSelectedRun = payload.dp2aSelectedRun;
+      if (payload.dp2aAnalysisRun !== undefined) dp2aAnalysisRun = payload.dp2aAnalysisRun;
+      if (payload.dp2bSelectedRun !== undefined) dp2bSelectedRun = payload.dp2bSelectedRun;
+      if (payload.dp2bAnalysisRun !== undefined) dp2bAnalysisRun = payload.dp2bAnalysisRun;
+      localStorage.setItem(STORAGE_KEY, raw);
+      restoreJournalFields();
+      restoreBriefFields();
+      csRenderDataLog();
+      const disp = document.getElementById('rp-code-display');
+      if (disp) disp.textContent = resumeCode || code;
+      input.value = '';
+      showSection(savedCurrentSection || 'section-1');
+    } catch(e) {
+      alert('There was a problem loading that code. Please try again.');
+    }
+  }
+
+
+  // ============================================================
+  // TIME TRACKING
+  // ============================================================
+
+  let sectionTimings    = {};  // sectionId → total seconds spent
+  let sectionStartTime  = null; // Date.now() when current section started
+
+  function timeTrackingInit() {
+    sectionStartTime = Date.now();
+  }
+
+  function timeTrackingEnter(sectionId) {
+    sectionStartTime = Date.now();
+  }
+
+  function timeTrackingLeave() {
+    if (!currentSection || sectionStartTime === null) return;
+    const elapsed = Math.floor((Date.now() - sectionStartTime) / 1000);
+    sectionTimings[currentSection] = (sectionTimings[currentSection] || 0) + elapsed;
+    sectionStartTime = Date.now();
+  }
+
+  function fmtTime(totalSeconds) {
+    if (totalSeconds < 60) return totalSeconds + ' sec';
+    const m = Math.floor(totalSeconds / 60);
+    const s = totalSeconds % 60;
+    return m + ' min' + (s ? ' ' + s + ' sec' : '');
+  }
+
+
+  // ============================================================
+  // DP2 INTERACTIVE STATE — module-level so save/restore can access
+  // ============================================================
+  let dp2aSelectedRun   = null;
+  let dp2aAnalysisRun   = false;
+  let dp2bSelectedRun   = null;
+  let dp2bAnalysisRun   = false;
+
+
+  // ============================================================
+  // TEXT-TO-SPEECH (TTS)
+  // ============================================================
+
+  let ttsUtterance = null;
+  let ttsActiveSectionId = null;
+  const TTS_SELECTORS = [
+    '.section-header .section-title',
+    '.section-header .section-tag',
+    '.narrative p',
+    '.dialogue-block',
+    '.narrative-action',
+    '.s9-scaffold-box',
+    '.s11-takeaway-box',
+    '.pb-instruction-banner span:last-child',
+    '.ea-energy-analysis__callout',
+    '.investigation-check p',
+  ];
+  const TTS_EXCLUDE = [
+    '.field-journal', '.journal-textarea', '.s10-brief-output',
+    '.nav-row', '.export-row', '.s11-finish-row',
+    'button', 'textarea', 'input', '.placeholder',
+  ];
+
+  function ttsInit() {
+    // Inject Listen buttons into each section body
+    document.querySelectorAll('.section').forEach(sec => {
+      if (sec.id === 'section-0') return; // skip landing page
+      const body = sec.querySelector('.section-body');
+      if (!body) return;
+      const btn = document.createElement('button');
+      btn.className   = 'tts-listen-btn';
+      btn.dataset.sid = sec.id;
+      btn.setAttribute('aria-label', 'Listen to this page');
+      btn.innerHTML   = '<span class="tts-icon">🔊</span> Listen';
+      btn.addEventListener('click', () => ttsToggle(sec.id, btn));
+      body.insertBefore(btn, body.firstChild);
+    });
+  }
+
+  function ttsToggle(sectionId, btn) {
+    if (!('speechSynthesis' in window)) {
+      alert('Text-to-speech is not supported in this browser.');
+      return;
+    }
+    if (ttsActiveSectionId === sectionId && window.speechSynthesis.speaking) {
+      ttsStop();
+      return;
+    }
+    ttsStop();
+    const section = document.getElementById(sectionId);
+    if (!section) return;
+
+    const text = ttsExtractText(section);
+    if (!text.trim()) return;
+
+    ttsUtterance = new SpeechSynthesisUtterance(text);
+    ttsUtterance.rate  = 0.95;
+    ttsUtterance.pitch = 1.0;
+    ttsUtterance.onend = () => { ttsActiveSectionId = null; ttsResetBtn(sectionId); };
+    ttsUtterance.onerror = () => { ttsActiveSectionId = null; ttsResetBtn(sectionId); };
+
+    ttsActiveSectionId = sectionId;
+    if (btn) { btn.innerHTML = '<span class="tts-icon">⏹</span> Stop'; btn.classList.add('tts-active'); }
+    window.speechSynthesis.speak(ttsUtterance);
+  }
+
+  function ttsStop() {
+    if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+    if (ttsActiveSectionId) ttsResetBtn(ttsActiveSectionId);
+    ttsActiveSectionId = null;
+    ttsUtterance = null;
+  }
+
+  function ttsResetBtn(sectionId) {
+    const sec = document.getElementById(sectionId);
+    if (!sec) return;
+    const btn = sec.querySelector('.tts-listen-btn');
+    if (btn) { btn.innerHTML = '<span class="tts-icon">🔊</span> Listen'; btn.classList.remove('tts-active'); }
+  }
+
+  function ttsExtractText(section) {
+    const clone = section.cloneNode(true);
+    // Remove excluded elements from clone
+    const excludeSel = TTS_EXCLUDE.join(', ');
+    clone.querySelectorAll(excludeSel).forEach(el => el.remove());
+    // Also remove TTS button itself, hotspot layers, iframe, and hidden elements
+    clone.querySelectorAll('.tts-listen-btn, .pb-hotspot-layer, iframe, [hidden], .is-hidden, .embed-4a, .embed-4b, .embed-7a, .embed-7b, #brief-output, .s10-brief-output').forEach(el => el.remove());
+
+    const parts = [];
+    TTS_SELECTORS.forEach(sel => {
+      clone.querySelectorAll(sel).forEach(el => {
+        const t = el.textContent.trim();
+        if (t) parts.push(t);
+      });
+    });
+    // Deduplicate adjacent duplicates
+    const unique = parts.filter((p, i) => p !== parts[i - 1]);
+    return unique.join('. ');
+  }
 
 
 </script>
