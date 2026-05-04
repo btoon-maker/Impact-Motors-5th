@@ -2714,6 +2714,7 @@ Cause and Effect; Systems and System Models; Energy and Matter</p>
 <p style="margin-bottom: 16px;">Recent crash tests have produced inconsistent results, and in some cases, passenger safety may be at risk. The engineering team has not been able to explain what is happening during these crashes.</p>
 <p style="margin-bottom: 16px;">Because of this, your team was brought in to take a closer look at the evidence from a <strong>scientific perspective and will need to figure out why this is happening.</strong></p>
 <p style="margin-bottom: 16px;">You report directly to the <strong>Senior Safety Engineer</strong>, who has asked your team to analyze the crash data and determine what is happening during these tests.</p>
+<p style="margin-bottom: 16px;"><p style="margin-bottom: 16px;"><strong>Your team will now conduct a crash investigation using available evidence. You will need to gather evidence, identify patterns, and build an explanation for what is happening during the crash.</strong></p></p>
 </div>
 
       <div style="margin: 24px 0; border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow);">
@@ -2809,7 +2810,7 @@ Cause and Effect; Systems and System Models; Energy and Matter</p>
       <p style="font-family: var(--font-ui); font-size: 19px; color: var(--gray-light); text-align:center; margin-bottom: 6px;">
       </p>
       <p><strong>Where will you start?</strong></p>
-      <p>You can start by examining how the car moved before the crash, or what changed during the crash.</p>
+      <p>You can start by examining how the car moved before the crash, or what changed structurally after the crash.</p>
       <p>Different starting points can reveal different clues, but they all help explain what’s happening.</p>
       <!-- Decision buttons — orange, routes to 4A or 4B -->
       <div class="decision-row">
@@ -3071,11 +3072,11 @@ Cause and Effect; Systems and System Models; Energy and Matter</p>
 
 
     <!-- ===================================================
-       SECTION 5A — DP1 Convergence: What Did We Notice?
+       SECTION 5A — DP1 Convergence: Team Briefing: What Did We Notice Across the Evidence?
   =================================================== -->
   <section id="section-5a" class="section">
     <div class="section-header convergence">
-      <div class="section-title">What Did We Notice?</div>
+      <div class="section-title">Team Briefing: What Did We Notice Across the Evidence?</div>
     </div>
     <div class="section-body convergence-body">
 
@@ -3190,11 +3191,11 @@ Cause and Effect; Systems and System Models; Energy and Matter</p>
 
 
   <!-- ===================================================
-       SECTION 5B — DP1 Convergence: What Does It Mean?
+       SECTION 5B — DP1 Convergence: Team Briefing: What Does It Mean?
   =================================================== -->
   <section id="section-5b" class="section">
     <div class="section-header convergence">
-      <div class="section-title">What Does It Mean?</div>
+      <div class="section-title">Team Briefing: What Does It Mean?</div>
     </div>
     <div class="section-body convergence-body">
 
@@ -3511,7 +3512,7 @@ Your team brings this question to Molly, the Senior Safety Engineer.</p>
 “You’ll need to decide what variable to analyze, and what kind of evidence to look for.”</div>
 
 <p>
-Different investigation choices can reveal different clues.</p>
+No single investigation shows the full picture; your team will need to work together to gather evidence from multiple perspectives.</p>
 
 <h3 class="decision-prompt">
   Where will you start your energy analysis?
@@ -3872,7 +3873,7 @@ Different investigation choices can reveal different clues.</p>
     <div class="section-body">
 
       <div class="narrative">
-        <p>Your investigation is almost complete.</p>
+        <p><strong>Your investigation is almost complete.</strong></p>
         <p>You have analyzed crash test data, looked for patterns, and investigated where energy went during the crash.</p>
         <p>Now the engineering team needs your <strong>scientific explanation</strong> before they make changes to the vehicle design.</p>
       </div>
@@ -3883,8 +3884,8 @@ Different investigation choices can reveal different clues.</p>
         "The engineers do not need a guess," Molly says. "They need a clear scientific explanation supported by evidence."
       </div>
 
-      <div class="dialogue-block">
-        "Use your findings to explain what is happening during the crash so the engineering team can make safer design decisions."
+      <div class="narrative">
+        Use your findings to explain what is happening during the crash so the engineering team can make safer design decisions.
       </div>
 
       <!-- Brief Builder -->
@@ -4242,8 +4243,8 @@ Different investigation choices can reveal different clues.</p>
     'section-3':  { num: 3,  title: 'Decision Point 1' },
     'section-4a': { num: 4,  title: 'Path A — Motion' },
     'section-4b': { num: 4,  title: 'Path B — Damage' },
-    'section-5a': { num: 5,  title: 'Convergence 1A — What Did We Notice?' },
-    'section-5b': { num: 5,  title: 'Convergence 1B — What Does It Mean?' },
+    'section-5a': { num: 5,  title: 'Convergence 1A — Team Briefing: What Did We Notice Across the Evidence?' },
+    'section-5b': { num: 5,  title: 'Convergence 1B — Team Briefing: What Does It Mean?' },
     'section-5c': { num: 6,  title: 'What Are We Wondering?' },
     'section-6':  { num: 7,  title: 'Decision Point 2' },
     'section-7a': { num: 8,  title: 'Path A — Deformation' },
@@ -4523,8 +4524,8 @@ Different investigation choices can reveal different clues.</p>
       'section-2': 'Welcome to Impact Motors', 'section-3': 'Decision Point 1',
       'section-4a': 'Path A — Review Motion Evidence',
       'section-4b': 'Path B — Review Structural Damage Evidence',
-      'section-5a': 'Convergence — What Did We Notice?',
-      'section-5b': 'Convergence — What Does It Mean?',
+      'section-5a': 'Convergence — Team Briefing: What Did We Notice Across the Evidence?',
+      'section-5b': 'Convergence — Team Briefing: What Does It Mean?',
       'section-5c': 'What Are We Wondering?',
       'section-6': 'Decision Point 2 — Where Did the Energy Go?',
       'section-7a': 'Path A — Follow the Energy Into the Car',
@@ -4556,8 +4557,8 @@ Different investigation choices can reveal different clues.</p>
     const journals = [
       { key: 's4a', section: 'Section 4A — Path A: Motion', prompt: 'What did you notice about how the car moved in each test run? How did the motion differ between the three test runs? What patterns do you notice?' },
       { key: 's4b', section: 'Section 4B — Path B: Damage', prompt: 'What changes do you observe during each crash? How do the changes differ between the test runs? What patterns do you notice about where the damage occurs?' },
-      { key: 's5a', section: 'Section 5A — What Did We Notice?', prompt: 'What patterns do you notice across the test runs? Use evidence from at least two test runs.' },
-      { key: 's5b', section: 'Section 5B — What Does It Mean?', prompt: 'What did the Crash Science Briefing help you understand about why some test runs showed more change than others?' },
+      { key: 's5a', section: 'Section 5A — Team Briefing: What Did We Notice Across the Evidence?', prompt: 'What patterns do you notice across the test runs? Use evidence from at least two test runs.' },
+      { key: 's5b', section: 'Section 5B — Team Briefing: What Does It Mean?', prompt: 'What did the Crash Science Briefing help you understand about why some test runs showed more change than others?' },
       { key: 's7a', section: 'Section 7A — Path A: Into the Car', prompt: 'What evidence do you see that energy moved into the car during the crash? Use details from at least one test run.' },
       { key: 's7b', section: 'Section 7B — Path B: Into the Surroundings', prompt: 'What evidence do you see that energy spread into the surroundings during the crash? Use details from at least one test run.' },
     ];
