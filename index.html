@@ -2539,6 +2539,75 @@
     .im-confirm-box .im-modal-btns .btn-confirm-yes:hover { background: var(--orange-dim); }
 
     /* ============================================================
+       GLOSSARY MODAL
+    ============================================================ */
+    .im-glossary-box {
+      background: var(--navy);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-top: 4px solid var(--blue);
+      border-radius: var(--radius-lg);
+      padding: 0;
+      max-width: 600px;
+      width: 100%;
+      max-height: 85vh;
+      box-shadow: 0 16px 60px rgba(0,0,0,0.7);
+      animation: fadeIn 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .im-glossary-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 28px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      flex-shrink: 0;
+    }
+    .im-glossary-header .im-modal-title {
+      margin-bottom: 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 22px;
+    }
+    .im-glossary-close {
+      background: transparent;
+      border: none;
+      color: var(--gray-mid);
+      font-size: 26px;
+      line-height: 1;
+      cursor: pointer;
+      padding: 4px 10px;
+      border-radius: 6px;
+      transition: background var(--transition), color var(--transition);
+    }
+    .im-glossary-close:hover { background: rgba(255,255,255,0.1); color: #fff; }
+    .im-glossary-body {
+      overflow-y: auto;
+      padding: 8px 28px 24px;
+    }
+    .im-gloss-term {
+      padding: 18px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .im-gloss-term:last-child { border-bottom: none; }
+    .im-gloss-term h3 {
+      font-family: var(--font-head);
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--blue-on-dark);
+      margin-bottom: 6px;
+    }
+    .im-gloss-term p {
+      font-family: var(--font-body);
+      font-size: 18px;
+      color: var(--gray-light);
+      line-height: 1.55;
+      margin: 0;
+    }
+
+    /* ============================================================
        TEXT-TO-SPEECH LISTEN BUTTON
     ============================================================ */
     .tts-listen-btn {
@@ -2633,6 +2702,7 @@
   <!-- Utility buttons — hidden on Section 0 -->
   <div id="util-buttons">
     <button class="btn-util" onclick="exportModalOpen()" title="Download your field journal">⬇ Export Journal</button>
+    <button class="btn-util" onclick="glossaryModalOpen()" title="View investigation vocabulary">📖 Glossary</button>
     <button class="btn-util btn-util-danger" onclick="confirmModalOpen()" title="Clear progress and restart">↺ Restart</button>
   </div>
 </header>
@@ -2765,7 +2835,7 @@ Cause and Effect; Systems and System Models; Energy and Matter</p>
 </div>
 
       <div style="margin: 24px 0; border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow);">
-        <img src="images/Energy_Entry2.png" alt="Junior Scientists Sitting at a Table" style="width:100%; display:block; border-radius: var(--radius-lg);">
+        <img src="images/Energy_Entry2.png" style="width:100%; display:block; border-radius: var(--radius-lg);">
       </div>
 
       <!-- Continue button triggers navigation to Section 2 -->
@@ -2802,7 +2872,7 @@ Cause and Effect; Systems and System Models; Energy and Matter</p>
 
     <!-- Molly image -->
     <div style="flex:1; min-width:300px; max-width:420px;">
-      <img src="images/Energy_Meet Molly2.png" alt="Molly, Senior Safety Engineer"
+      <img src="images/Energy_Meet Molly2.png"
            style="width:100%; display:block; border-radius:var(--radius-lg); box-shadow:var(--shadow);">
     </div>
 
@@ -2855,7 +2925,7 @@ Cause and Effect; Systems and System Models; Energy and Matter</p>
 </div>
 
 <div class="placeholder" style="min-height: 120px; text-align: center;">
-  <img src="images/Energy_Laptop_with_Images.png" alt="Decision Context Image or Diagram"
+  <img src="images/Energy_Laptop_with_Images.png"
        style="max-width: 100%; max-height: 600px; object-fit: contain;"
        onerror="this.style.display='none'" />
 </div>
@@ -2911,12 +2981,10 @@ Examine how the car changed during the crash
         <section class="cs-track-stage" id="trackStage" aria-label="Car test track simulation">
           <img class="cs-track-bg"
                src="images/Energy_track2.png"
-               alt="Test track"
                onerror="this.style.display='none'" />
           <img class="cs-car-on-track"
                id="carImage"
                src="images/Energy_car.png"
-               alt="Test car"
                onerror="this.src='data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 32'><rect x='2' y='10' width='76' height='16' rx='4' fill='%23F97316'/><rect x='10' y='6' width='40' height='14' rx='3' fill='%23EA580C'/><circle cx='14' cy='28' r='5' fill='%231F2A44'/><circle cx='14' cy='28' r='3' fill='%236B7280'/><circle cx='60' cy='28' r='5' fill='%231F2A44'/><circle cx='60' cy='28' r='3' fill='%236B7280'/></svg>'" />
         </section>
 
@@ -3016,8 +3084,8 @@ Examine how the car changed during the crash
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l4-4 4 4 4-6 6 8"/><circle cx="8.5" cy="8.5" r="1.5"/></svg>
                 <span>images/Energy_no impact.png</span>
               </div>
-              <img class="pb-card-img" id="img-1-before" src="images/Energy_no impact.png" alt="Vehicle before impact — Test 1" onload="pbOnImgLoad('1','before')" onerror="pbOnImgError('1','before')" />
-              <img class="pb-card-img hidden" id="img-1-after" src="images/Energy_TestRun1.png" alt="Vehicle after impact — Test 1" onload="pbOnImgLoad('1','after')" onerror="pbOnImgError('1','after')" />
+              <img class="pb-card-img" id="img-1-before" src="images/Energy_no impact.png" onload="pbOnImgLoad('1','before')" onerror="pbOnImgError('1','before')" />
+              <img class="pb-card-img hidden" id="img-1-after" src="images/Energy_TestRun1.png" onload="pbOnImgLoad('1','after')" onerror="pbOnImgError('1','after')" />
               <div class="pb-after-badge">After Impact</div>
               <div class="pb-hotspot-layer" id="hotspots-1">
 <button class="pb-hotspot" style="left:76%; top:66%;" data-card="1" data-title="Bumper" data-text="The bumper is at the front of the car. In this test run, it shows only a small change where it meets the barrier." onclick="toggleHotspot(this)" onmouseenter="hoverHotspot(this)" onmouseleave="leaveHotspot(this)" aria-label="Bumper — Test 1" aria-expanded="false"><span class="pb-hotspot-label">Bumper</span></button>
@@ -3046,8 +3114,8 @@ Examine how the car changed during the crash
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l4-4 4 4 4-6 6 8"/><circle cx="8.5" cy="8.5" r="1.5"/></svg>
                 <span>images/Energy_no impact.png</span>
               </div>
-              <img class="pb-card-img" id="img-2-before" src="images/Energy_no impact.png" alt="Vehicle before impact — Test 2" onload="pbOnImgLoad('2','before')" onerror="pbOnImgError('2','before')" />
-              <img class="pb-card-img hidden" id="img-2-after" src="images/Energy_TestRun2.png" alt="Vehicle after impact — Test 2" onload="pbOnImgLoad('2','after')" onerror="pbOnImgError('2','after')" />
+              <img class="pb-card-img" id="img-2-before" src="images/Energy_no impact.png" onload="pbOnImgLoad('2','before')" onerror="pbOnImgError('2','before')" />
+              <img class="pb-card-img hidden" id="img-2-after" src="images/Energy_TestRun2.png" onload="pbOnImgLoad('2','after')" onerror="pbOnImgError('2','after')" />
               <div class="pb-after-badge">After Impact</div>
               <div class="pb-hotspot-layer" id="hotspots-2">
 <button class="pb-hotspot" style="left:77%; top:67%;" data-card="2" data-title="Bumper" data-text="The bumper is heavily compressed near the barrier. Its original shape is difficult to recognize after the impact." onclick="toggleHotspot(this)" onmouseenter="hoverHotspot(this)" onmouseleave="leaveHotspot(this)" aria-label="Bumper — Test 2" aria-expanded="false"><span class="pb-hotspot-label">Bumper</span></button>
@@ -3076,8 +3144,8 @@ Examine how the car changed during the crash
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9l4-4 4 4 4-6 6 8"/><circle cx="8.5" cy="8.5" r="1.5"/></svg>
                 <span>images/Energy_no impact.png</span>
               </div>
-              <img class="pb-card-img" id="img-3-before" src="images/Energy_no impact.png" alt="Vehicle before impact — Test 3" onload="pbOnImgLoad('3','before')" onerror="pbOnImgError('3','before')" />
-              <img class="pb-card-img hidden" id="img-3-after" src="images/Energy_TestRun3.png" alt="Vehicle after impact — Test 3" onload="pbOnImgLoad('3','after')" onerror="pbOnImgError('3','after')" />
+              <img class="pb-card-img" id="img-3-before" src="images/Energy_no impact.png" onload="pbOnImgLoad('3','before')" onerror="pbOnImgError('3','before')" />
+              <img class="pb-card-img hidden" id="img-3-after" src="images/Energy_TestRun3.png" onload="pbOnImgLoad('3','after')" onerror="pbOnImgError('3','after')" />
               <div class="pb-after-badge">After Impact</div>
               <div class="pb-hotspot-layer" id="hotspots-3">
 <button class="pb-hotspot" style="left:77%; top:67%;" data-card="3" data-title="Bumper" data-text="The bumper is pushed inward. The change is greater than in Test Run 1, but less than in Test Run 2." onclick="toggleHotspot(this)" onmouseenter="hoverHotspot(this)" onmouseleave="leaveHotspot(this)" aria-label="Bumper — Test 3" aria-expanded="false"><span class="pb-hotspot-label">Bumper</span></button>
@@ -3157,7 +3225,6 @@ Examine how the car changed during the crash
         <td>
           <strong>Test Run 1</strong>
           <img src="images/Energy_no impact.png"
-               alt="Test Run 1 — vehicle before impact"
                class="s5a-evidence-img"
                onerror="this.style.display='none'" />
         </td>
@@ -3165,7 +3232,6 @@ Examine how the car changed during the crash
         <td>Less front-end change observed</td>
         <td>
           <img src="images/Energy_TestRun1.png"
-               alt="Test Run 1 — vehicle front-end after impact, showing minimal deformation"
                class="s5a-evidence-img"
                onerror="this.style.display='none'" />
         </td>
@@ -3175,7 +3241,6 @@ Examine how the car changed during the crash
         <td>
           <strong>Test Run 2</strong>
           <img src="images/Energy_no impact.png"
-               alt="Test Run 2 — vehicle before impact"
                class="s5a-evidence-img"
                onerror="this.style.display='none'" />
         </td>
@@ -3183,7 +3248,6 @@ Examine how the car changed during the crash
         <td>Most front-end change observed</td>
         <td>
           <img src="images/Energy_TestRun2.png"
-               alt="Test Run 2 — vehicle front-end after impact, showing greatest deformation"
                class="s5a-evidence-img"
                onerror="this.style.display='none'" />
         </td>
@@ -3193,7 +3257,6 @@ Examine how the car changed during the crash
         <td>
           <strong>Test Run 3</strong>
           <img src="images/Energy_no impact.png"
-               alt="Test Run 3 — vehicle before impact"
                class="s5a-evidence-img"
                onerror="this.style.display='none'" />
         </td>
@@ -3201,7 +3264,6 @@ Examine how the car changed during the crash
         <td>Moderate front-end change observed</td>
         <td>
           <img src="images/Energy_TestRun3.png"
-               alt="Test Run 3 — vehicle front-end after impact, showing moderate deformation"
                class="s5a-evidence-img"
                onerror="this.style.display='none'" />
         </td>
@@ -3529,7 +3591,6 @@ update();
 
 <div style="margin: 20px 0; border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-sm);">
   <img src="images/Energy_wondering2.png"
-       alt="Crash test team analyzing results and asking where energy goes during a crash"
        style="width: 100%; display: block; border-radius: var(--radius-lg);"
        onerror="this.parentElement.style.display='none'" />
 </div>
@@ -3578,7 +3639,7 @@ Where will you start your energy analysis?</h3>
       </div>
 
 <div style="margin: 16px 0; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-sm);">
-  <img src="images/Energy_AnalysisTool2.png" alt="Energy Path Decision Context Visual"
+  <img src="images/Energy_AnalysisTool2.png"
        style="width:100%; display:block; border-radius: var(--radius);"
        onerror="this.parentElement.style.display='none'" />
 </div>
@@ -3676,11 +3737,10 @@ Where will you start your energy analysis?      </p>
                 <tr>
                   <td>
                     <img id="ea7a-img-before"
-                         src="images/Energy_no impact.png"
-                         alt="Car before impact – no deformation visible" />
+                         src="images/Energy_no impact.png" />
                   </td>
                   <td>
-                    <img id="ea7a-img-after" src="" alt="" />
+                    <img id="ea7a-img-after" src="" />
                   </td>
                 </tr>
               </tbody>
@@ -3694,7 +3754,7 @@ Where will you start your energy analysis?      </p>
           </div>
 
           <div id="ea7a-result" class="ea-energy-analysis__result is-hidden" aria-live="polite">
-            <img id="ea7a-img-analysis" src="" alt="" />
+            <img id="ea7a-img-analysis" src="" />
             <p class="ea-energy-analysis__result-label" id="ea7a-label"></p>
           </div>
 
@@ -3799,11 +3859,10 @@ Where will you start your energy analysis?      </p>
                 <tr>
                   <td>
                     <img id="ea7b-img-before"
-                         src="images/Energy_no impact.png"
-                         alt="Car before impact – no deformation visible" />
+                         src="images/Energy_no impact.png" />
                   </td>
                   <td>
-                    <img id="ea7b-img-after" src="" alt="" />
+                    <img id="ea7b-img-after" src="" />
                   </td>
                 </tr>
               </tbody>
@@ -3817,7 +3876,7 @@ Where will you start your energy analysis?      </p>
           </div>
 
           <div id="ea7b-result" class="ea-energy-analysis__result is-hidden" aria-live="polite">
-            <img id="ea7b-img-analysis" src="" alt="" />
+            <img id="ea7b-img-analysis" src="" />
             <p class="ea-energy-analysis__result-label" id="ea7b-label"></p>
           </div>
 
@@ -3886,13 +3945,11 @@ Where will you start your energy analysis?      </p>
         <div class="s9-comparison-card">
           <div class="s9-comparison-card-heading">Analyze Vehicle Changes</div>
           <img src="images/Energy_TestRun2AnalysisA.png"
-               alt="Energy analysis showing evidence of energy moving into the car during Test Run 2."
                onerror="this.style.opacity='0.3'" />
         </div>
         <div class="s9-comparison-card">
           <div class="s9-comparison-card-heading">Analyze Surrounding Effects</div>
           <img src="images/Energy_TestRun2AnalysisB.png"
-               alt="Energy analysis showing evidence of energy moving into the surroundings during Test Run 2."
                onerror="this.style.opacity='0.3'" />
         </div>
       </div>
@@ -4196,7 +4253,7 @@ Where will you start your energy analysis?      </p>
       <div class="dialogue-block">
         "Now we can use your findings to think more carefully about how energy transfers during a crash, and how future vehicle designs can better protect passengers."
       </div>
-<div class="placeholder" style="min-height: 120px; text-align: center;"> <img src="images/Energy_Investigation Complete.png" alt="Decision Context Image or Diagram" style="max-width: 100%; max-height: 600px; object-fit: contain;" onerror="this.style.display='none'" /> </div>
+<div class="placeholder" style="min-height: 120px; text-align: center;"> <img src="images/Energy_Investigation Complete.png" style="max-width: 100%; max-height: 600px; object-fit: contain;" onerror="this.style.display='none'" /> </div>
       <div class="narrative">
         <p>As a <strong>Junior Crash Test Scientist</strong>, you did more than describe vehicle changes.</p>
         <p>You analyzed data, identified patterns, investigated energy transfer, and communicated a scientific explanation to help solve a real engineering problem.</p>
@@ -4294,6 +4351,51 @@ Where will you start your energy analysis?      </p>
 </div>
 
 
+<!-- ============================================================
+     GLOSSARY MODAL
+============================================================ -->
+<div class="im-modal-overlay" id="glossary-modal" role="dialog" aria-modal="true" aria-labelledby="glossary-modal-title" onclick="glossaryModalBackdrop(event)">
+  <div class="im-glossary-box">
+    <div class="im-glossary-header">
+      <div class="im-modal-title" id="glossary-modal-title">
+        <span>📖</span><span>Investigation Glossary</span>
+      </div>
+      <button class="im-glossary-close" onclick="glossaryModalClose()" aria-label="Close glossary">&times;</button>
+    </div>
+    <div class="im-glossary-body">
+      <div class="im-gloss-term">
+        <h3>Evidence</h3>
+        <p>Information collected during an investigation that helps explain what happened.</p>
+      </div>
+      <div class="im-gloss-term">
+        <h3>Pattern</h3>
+        <p>Something that happens more than once or shows a connection across evidence.</p>
+      </div>
+      <div class="im-gloss-term">
+        <h3>Motion</h3>
+        <p>A change in an object&rsquo;s position over time.</p>
+      </div>
+      <div class="im-gloss-term">
+        <h3>Impact</h3>
+        <p>The moment when one object hits another object.</p>
+      </div>
+      <div class="im-gloss-term">
+        <h3>System</h3>
+        <p>A group of connected parts that work together or affect one another.</p>
+      </div>
+      <div class="im-gloss-term">
+        <h3>Vehicle Change</h3>
+        <p>A change to the car&rsquo;s shape after impact, such as bending, crumpling, or compression.</p>
+      </div>
+      <div class="im-gloss-term">
+        <h3>Surroundings</h3>
+        <p>The area around the crash, including the air, barrier, floor, and nearby objects.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 
 
 <!-- ============================================================
@@ -4347,6 +4449,19 @@ Where will you start your energy analysis?      </p>
 
   // journalData: keyed by short section key (e.g. 's2', 's4a')
   let journalData = {};
+
+  // Section 8B — Crash Energy Model state (declared here so saveToStorage
+  // can reference them on first page load before user interaction).
+  let briefModelBefore  = null;
+  let briefModelDuring  = null;
+  let briefModelAfter   = null;
+  let briefModelCreated = false;
+
+  // DP2 energy analysis state (declared early for same reason).
+  let dp2aSelectedRun = null;
+  let dp2aAnalysisRun = false;
+  let dp2bSelectedRun = null;
+  let dp2bAnalysisRun = false;
 
 
   // ── Initialise on page load ──────────────────────────────────
@@ -4645,8 +4760,8 @@ Where will you start your energy analysis?      </p>
       { key: 's5a', section: 'Section 5A — Team Briefing: What Did We Notice Across the Evidence?', prompt: 'What patterns do you notice across the test runs? Use evidence from at least two test runs.' },
       { key: 's5b', section: 'Section 5B — Team Briefing: Explaining the Crash Pattern', prompt: 'How does the Crash Science Briefing help explain why some test runs showed more change than others? What evidence supports your thinking?' },
       { key: 's7a', section: 'Section 7A — Path A: Into the Car', prompt: 'What evidence do you see that energy was transferred through the car during the crash? Use details from at least one test run.' },
-      { key: 's8b', section: 'Section 8B — Modeling Energy Transfer within a Car Crash', prompt: 'Look at the crash energy model you built. What evidence led you to choose your model?' },
       { key: 's7b', section: 'Section 7B — Path B: Into the Surroundings', prompt: 'What evidence do you see that energy was transferred to the surroundings during the crash? Use details from at least one test run.' },
+      { key: 's8b', section: 'Section 8B — Modeling Energy Transfer within a Car Crash', prompt: 'Look at the crash energy model you built. What evidence led you to choose your model?' },
     ];
     journals.forEach(({key, section, prompt}) => {
       line('[ ' + section + ' ]');
@@ -4795,6 +4910,32 @@ Where will you start your energy analysis?      </p>
     confirmModalClose();
     doRestartLesson();
   }
+
+  // ── Glossary Modal ───────────────────────────────────────────
+
+  function glossaryModalOpen() {
+    document.getElementById('glossary-modal').classList.add('open');
+    // Scroll the glossary body back to the top each time it opens
+    const body = document.querySelector('#glossary-modal .im-glossary-body');
+    if (body) body.scrollTop = 0;
+  }
+
+  function glossaryModalClose() {
+    document.getElementById('glossary-modal').classList.remove('open');
+  }
+
+  // Close when clicking the dimmed backdrop (but not when clicking inside the box)
+  function glossaryModalBackdrop(event) {
+    if (event.target.id === 'glossary-modal') glossaryModalClose();
+  }
+
+  // Close on Escape key when the modal is open
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      const modal = document.getElementById('glossary-modal');
+      if (modal && modal.classList.contains('open')) glossaryModalClose();
+    }
+  });
 
   function doRestartLesson() {
     ttsStop();
@@ -5299,14 +5440,14 @@ Where will you start your energy analysis?      </p>
     if (!container7a) return;
 
     const afterImages7a = {
-      1: { src: 'images/Energy_TestRun1.png', alt: 'Car after impact in Test Run 1 – showing deformation from crash energy' },
-      2: { src: 'images/Energy_TestRun2.png', alt: 'Car after impact in Test Run 2 – showing deformation from crash energy' },
-      3: { src: 'images/Energy_TestRun3.png', alt: 'Car after impact in Test Run 3 – showing deformation from crash energy' }
+      1: { src: 'images/Energy_TestRun1.png' },
+      2: { src: 'images/Energy_TestRun2.png' },
+      3: { src: 'images/Energy_TestRun3.png' }
     };
     const analysisImages7a = {
-      1: { src: 'images/Energy_TestRun1AnalysisA.png', alt: 'Energy analysis diagram for Test Run 1 – Path A findings' },
-      2: { src: 'images/Energy_TestRun2AnalysisA.png', alt: 'Energy analysis diagram for Test Run 2 – Path A findings' },
-      3: { src: 'images/Energy_TestRun3AnalysisA.png', alt: 'Energy analysis diagram for Test Run 3 – Path A findings' }
+      1: { src: 'images/Energy_TestRun1AnalysisA.png' },
+      2: { src: 'images/Energy_TestRun2AnalysisA.png' },
+      3: { src: 'images/Energy_TestRun3AnalysisA.png' }
     };
 
     const runBtns7a   = container7a.querySelectorAll('.ea-btn--run');
@@ -5321,8 +5462,7 @@ Where will you start your energy analysis?      </p>
     function hideAnalysis7a() {
       result7a.classList.add('is-hidden');
       imgAna7a.src = '';
-      imgAna7a.alt = '';
-      label7a.textContent = '';
+label7a.textContent = '';
     }
 
     runBtns7a.forEach(function (btn) {
@@ -5337,8 +5477,7 @@ Where will you start your energy analysis?      </p>
         selectedRun7a = run;
         dp2aSelectedRun = run; // expose for export/save
         imgAfter7a.src = afterImages7a[run].src;
-        imgAfter7a.alt = afterImages7a[run].alt;
-        tableWrap7a.classList.remove('is-hidden');
+tableWrap7a.classList.remove('is-hidden');
         hideAnalysis7a();
         dp2aAnalysisRun = false;
         saveToStorage();
@@ -5348,8 +5487,7 @@ Where will you start your energy analysis?      </p>
     btnAna7a.addEventListener('click', function () {
       if (!selectedRun7a) return;
       imgAna7a.src = analysisImages7a[selectedRun7a].src;
-      imgAna7a.alt = analysisImages7a[selectedRun7a].alt;
-      label7a.textContent = 'Energy Analysis – Test Run ' + selectedRun7a + ' (Path A)';
+label7a.textContent = 'Energy Analysis – Test Run ' + selectedRun7a + ' (Path A)';
       result7a.classList.remove('is-hidden');
       dp2aAnalysisRun = true;
       saveToStorage();
@@ -5367,14 +5505,14 @@ Where will you start your energy analysis?      </p>
     if (!container7b) return;
 
     const afterImages7b = {
-      1: { src: 'images/Energy_TestRun1.png', alt: 'Car after impact in Test Run 1 – showing energy in surroundings' },
-      2: { src: 'images/Energy_TestRun2.png', alt: 'Car after impact in Test Run 2 – showing energy in surroundings' },
-      3: { src: 'images/Energy_TestRun3.png', alt: 'Car after impact in Test Run 3 – showing energy in surroundings' }
+      1: { src: 'images/Energy_TestRun1.png' },
+      2: { src: 'images/Energy_TestRun2.png' },
+      3: { src: 'images/Energy_TestRun3.png' }
     };
     const analysisImages7b = {
-      1: { src: 'images/Energy_TestRun1AnalysisB.png', alt: 'Energy analysis diagram for Test Run 1 – Path B findings' },
-      2: { src: 'images/Energy_TestRun2AnalysisB.png', alt: 'Energy analysis diagram for Test Run 2 – Path B findings' },
-      3: { src: 'images/Energy_TestRun3AnalysisB.png', alt: 'Energy analysis diagram for Test Run 3 – Path B findings' }
+      1: { src: 'images/Energy_TestRun1AnalysisB.png' },
+      2: { src: 'images/Energy_TestRun2AnalysisB.png' },
+      3: { src: 'images/Energy_TestRun3AnalysisB.png' }
     };
 
     const runBtns7b   = container7b.querySelectorAll('.ea-btn--run');
@@ -5389,8 +5527,7 @@ Where will you start your energy analysis?      </p>
     function hideAnalysis7b() {
       result7b.classList.add('is-hidden');
       imgAna7b.src = '';
-      imgAna7b.alt = '';
-      label7b.textContent = '';
+label7b.textContent = '';
     }
 
     runBtns7b.forEach(function (btn) {
@@ -5405,8 +5542,7 @@ Where will you start your energy analysis?      </p>
         selectedRun7b = run;
         dp2bSelectedRun = run; // expose for export/save
         imgAfter7b.src = afterImages7b[run].src;
-        imgAfter7b.alt = afterImages7b[run].alt;
-        tableWrap7b.classList.remove('is-hidden');
+tableWrap7b.classList.remove('is-hidden');
         hideAnalysis7b();
         dp2bAnalysisRun = false;
         saveToStorage();
@@ -5416,8 +5552,7 @@ Where will you start your energy analysis?      </p>
     btnAna7b.addEventListener('click', function () {
       if (!selectedRun7b) return;
       imgAna7b.src = analysisImages7b[selectedRun7b].src;
-      imgAna7b.alt = analysisImages7b[selectedRun7b].alt;
-      label7b.textContent = 'Energy Analysis – Test Run ' + selectedRun7b + ' (Path B)';
+label7b.textContent = 'Energy Analysis – Test Run ' + selectedRun7b + ' (Path B)';
       result7b.classList.remove('is-hidden');
       dp2bAnalysisRun = true;
       saveToStorage();
@@ -5527,12 +5662,9 @@ Where will you start your energy analysis?      </p>
 
 
   // ============================================================
-  // DP2 INTERACTIVE STATE — module-level so save/restore can access
+  // DP2 INTERACTIVE STATE — declarations moved to top of state section
+  // so saveToStorage() can reference them on first page load.
   // ============================================================
-  let dp2aSelectedRun   = null;
-  let dp2aAnalysisRun   = false;
-  let dp2bSelectedRun   = null;
-  let dp2bAnalysisRun   = false;
 
 
   // ============================================================
