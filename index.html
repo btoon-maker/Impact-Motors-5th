@@ -4474,16 +4474,36 @@ Where will you start your energy analysis?      </p>
 <div class="im-modal-overlay" id="export-modal" role="dialog" aria-modal="true" aria-labelledby="export-modal-title">
   <div class="im-modal-box">
     <div class="im-modal-title" id="export-modal-title">Export Your Field Journal</div>
+
     <div class="im-modal-body">
-      Type your name or identifier below.<br>
+      <div style="background:#f1f3f5;padding:12px 14px;border-radius:12px;margin-bottom:14px;line-height:1.45;">
+        <p style="margin:0 0 10px 0;">
+          <strong>Have a study ID?</strong><br>
+          Enter it below. You will upload this Field Journal in your engagement survey.
+        </p>
+
+        <p style="margin:0 0 10px 0;">
+          <strong>No study ID?</strong><br>
+          Enter your name or follow your teacher’s directions.
+        </p>
+
+        <p style="margin:0;">
+          <strong>Save your journal.</strong><br>
+          It will help during your post-lesson debrief.
+        </p>
+      </div>
+
       <strong>ImpactMotorsJournal</strong> will be added automatically to the end of the filename.
     </div>
-    <label class="im-modal-label" for="export-name-input">Your name or ID (optional):</label>
-    <input class="im-modal-input" type="text" id="export-name-input" placeholder="e.g. Toon"
-           oninput="exportModalPreview()" aria-label="Your name or ID for the filename" />
+
+    <label class="im-modal-label" for="export-name-input">Study ID or name:</label>
+    <input class="im-modal-input" type="text" id="export-name-input" placeholder="e.g. SIS-001 or Jordan"
+           oninput="exportModalPreview()" aria-label="Study ID or name for the filename" />
+
     <div class="im-modal-preview">
       Filename: <span id="export-filename-preview">ImpactMotorsJournal.txt</span>
     </div>
+
     <div class="im-modal-btns">
       <button class="btn-cancel" onclick="exportModalClose()">Cancel</button>
       <button class="btn-export-go" onclick="exportModalConfirm()">Export</button>
