@@ -4503,7 +4503,7 @@ Where will you start your energy analysis?      </p>
            oninput="exportModalPreview()" aria-label="Study ID or name for the filename" />
 
     <div class="im-modal-preview">
-      Filename: <span id="export-filename-preview">ImpactMotorsJournal.txt</span>
+      Filename: <span id="export-filename-preview">ImpactMotorsJournal.html</span>
     </div>
 
     <div class="im-modal-btns">
@@ -4855,7 +4855,7 @@ Where will you start your energy analysis?      </p>
 
   function exportModalOpen() {
     document.getElementById('export-name-input').value = '';
-    document.getElementById('export-filename-preview').textContent = 'ImpactMotorsJournal.txt';
+    document.getElementById('export-filename-preview').textContent = 'ImpactMotorsJournal.html';
     document.getElementById('export-modal').classList.add('open');
     setTimeout(() => document.getElementById('export-name-input').focus(), 100);
   }
@@ -4866,7 +4866,7 @@ Where will you start your energy analysis?      </p>
 
   function exportModalPreview() {
     const name = document.getElementById('export-name-input').value.trim();
-    const preview = name ? name + 'ImpactMotorsJournal.txt' : 'ImpactMotorsJournal.txt';
+    const preview = name ? name + 'ImpactMotorsJournal.html' : 'ImpactMotorsJournal.html';
     document.getElementById('export-filename-preview').textContent = preview;
   }
 
@@ -4876,171 +4876,208 @@ Where will you start your energy analysis?      </p>
     doExportJournal(name);
   }
 
-  function buildExportText(studentId) {
-    const now       = new Date();
-    const timestamp = now.toLocaleString();
-    const L         = [];
-    const line      = s => L.push(s);
-    const blank     = ()  => L.push('');
-    const rule      = ()  => L.push('======================================================');
-    const dash      = ()  => L.push('------------------------------------------------------');
+  function buildExportHTML(studentId) {
+    const esc = (s) => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    const val = (k) => { const v = journalData[k]; return (v && String(v).trim()) ? String(v).trim() : ''; };
 
-    rule(); line('  Impact Motors: Crash Investigation');
-    line('  Field Journal Export');
-    line('  Generated: ' + timestamp); rule(); blank();
-
-    // Student ID
-    dash(); line('  STUDENT IDENTIFIER'); dash();
-    line('Name / ID: ' + (studentId || 'Not provided')); blank();
-
-    // Time tracking
-    dash(); line('  TIME TRACKING'); dash();
-    const totalSec = Object.values(sectionTimings).reduce((a,b)=>a+b,0);
-    line('Total time in lesson: ' + fmtTime(totalSec));
-    blank();
     const sectionNames = {
       'section-0': 'Landing Page', 'section-1': 'Start Investigation',
       'section-2': 'Welcome to Impact Motors', 'section-3': 'Decision Point 1',
       'section-4a': 'Path A — Review Motion Evidence',
       'section-4b': 'Path B — Review Vehicle Damage Evidence',
-      'section-5a': 'Convergence — Team Briefing: What Did We Notice Across the Evidence?',
-      'section-5b': 'Convergence — Team Briefing: Explaining the Crash Pattern',
+      'section-5a': 'Convergence — What Did We Notice Across the Evidence?',
+      'section-5b': 'Convergence — Explaining the Crash Pattern',
       'section-5c': 'What Are We Wondering?',
       'section-6': 'Decision Point 2 — How Does Energy Move Through a Crash?',
       'section-7a': 'Path A — Analyze Vehicle Changes',
       'section-7b': 'Path B — Analyze Surrounding Effects',
-      'section-8': 'Convergence — Team Briefing: What Did We Discover About Energy?',
+      'section-8': 'Convergence — What Did We Discover About Energy?',
       'section-8b': 'Modeling Energy Transfer within a Car Crash',
       'section-9': 'Sharing Scientific Insights with the Engineering Team',
       'section-10': 'Mission Complete',
     };
-    Object.entries(sectionTimings).forEach(([id, secs]) => {
-      if (secs > 0) line('  ' + (sectionNames[id] || id) + ': ' + fmtTime(secs));
-    });
-    blank();
 
-    // Decision choices
-    dash(); line('  MISSION PATH — DECISION CHOICES'); dash();
-    line('Decision Point 1 — Where Will You Begin?');
-    if (decisions.dp1 === 'A') line('  ✓ Review Motion Evidence (Motion path)');
-    else if (decisions.dp1 === 'B') line('  ✓ Review Vehicle Damage Evidence (Damage path)');
-    else line('  (not yet chosen)');
-    blank();
-    line('Decision Point 2 — How Does Energy Move Through a Crash?');
-    if (decisions.dp2 === 'A') line('  ✓ Analyze Vehicle Changes');
-    else if (decisions.dp2 === 'B') line('  ✓ Analyze Surrounding Effects');
-    else line('  (not yet chosen)');
-    blank();
+    const dp1Label = decisions.dp1 === 'A' ? 'Review Motion Evidence (Motion path)'
+                   : decisions.dp1 === 'B' ? 'Review Vehicle Damage Evidence (Damage path)' : '—';
+    const dp2Label = decisions.dp2 === 'A' ? 'Analyze Vehicle Changes'
+                   : decisions.dp2 === 'B' ? 'Analyze Surrounding Effects' : '—';
+    const totalSec = Object.values(sectionTimings).reduce((a, b) => a + b, 0);
 
-    // Field journals with prompts
-    dash(); line('  FIELD JOURNAL RESPONSES'); dash(); blank();
-    const journals = [
-      { key: 's4a', section: 'Section 4A — Path A: Motion', prompt: 'What did you notice about the car’s motion before impact in each test run? How did the motion differ between the three test runs? What patterns do you notice?' },
-      { key: 's4b', section: 'Section 4B — Path B: Damage', prompt: 'What changes do you observe after impact in each test run? How do the changes differ across the test runs? What patterns do you notice about where the vehicle changes or damage appears?' },
-      { key: 's5a', section: 'Section 5A — Team Briefing: What Did We Notice Across the Evidence?', prompt: 'What patterns do you notice across the test runs? Use evidence from at least two test runs.' },
-      { key: 's5b', section: 'Section 5B — Team Briefing: Explaining the Crash Pattern', prompt: 'How does the Crash Science Briefing help explain why some test runs showed more change than others? What evidence supports your thinking?' },
-      { key: 's7a', section: 'Section 7A — Path A: Into the Car', prompt: 'What evidence do you see that energy was transferred through the car during the crash? Use details from at least one test run.' },
-      { key: 's7b', section: 'Section 7B — Path B: Into the Surroundings', prompt: 'What evidence do you see that energy was transferred to the surroundings during the crash? Use details from at least one test run.' },
-      { key: 's8b', section: 'Section 8B — Modeling Energy Transfer within a Car Crash', prompt: 'Look at the crash energy model you built. What evidence led you to choose your model?' },
-    ];
-    journals.forEach(({key, section, prompt}) => {
-      line('[ ' + section + ' ]');
-      line('Prompt: ' + prompt);
-      const val = journalData[key];
-      line('Response: ' + (val && val.trim() ? val.trim() : '[No response]'));
-      blank();
-    });
+    // builders
+    const entry = (section, prompt, v) =>
+      '<div class="entry"><div class="ekic">' + esc(section) + '</div>'
+      + '<h3 class="q">' + esc(prompt) + '</h3>'
+      + (v ? '<p class="a">' + esc(v) + '</p>' : '<p class="a empty">[No response]</p>')
+      + '</div>';
+    const dpHTML = (n, label, value, extra) =>
+      '<div class="dp-head"><span class="dp-n">' + n + '</span><div>'
+      + '<div class="dp-t">' + esc(label) + '</div>'
+      + (value ? '<div class="dp-c">You chose: <b>' + esc(value) + '</b></div>' : '<div class="dp-c">(not yet chosen)</div>')
+      + (extra ? '<div class="dp-x">' + extra + '</div>' : '')
+      + '</div></div>';
 
-    // DP1 Path A test data log
-    dash(); line('  DP1 PATH A — TEST DATA LOG (Motion Analysis)'); dash();
-    [1,2,3].forEach(n => {
-      line('Test Run ' + n + ':');
-      line('  Status: ' + (csTestLog[n] ? 'Replayed at ' + csTestLog[n] : 'Not yet replayed'));
-      const obs = csObservations[n];
-      line('  Observation: ' + (obs && obs.trim() ? obs.trim() : '[No observation recorded]'));
-    });
-    blank();
+    let flow = '';
 
-    // DP2 Energy Analysis interactions
-    dash(); line('  DP2 ENERGY ANALYSIS INTERACTIONS'); dash();
-    line('Path A (Into the Car):');
-    line('  Test run selected: ' + (dp2aSelectedRun ? 'Test Run ' + dp2aSelectedRun : 'None'));
-    line('  Run Energy Analysis clicked: ' + (dp2aAnalysisRun ? 'Yes' : 'No'));
-    blank();
-    line('Path B (Into the Surroundings):');
-    line('  Test run selected: ' + (dp2bSelectedRun ? 'Test Run ' + dp2bSelectedRun : 'None'));
-    line('  Run Energy Analysis clicked: ' + (dp2bAnalysisRun ? 'Yes' : 'No'));
-    blank();
-
-    // Crash Energy Model — Section 8B
-    dash(); line('  CRASH ENERGY MODEL (Section 8B)'); dash(); blank();
-    line('Before the Crash: ' + (briefModelBefore || '[No selection]'));
-    line('During the Crash: ' + (briefModelDuring || '[No selection]'));
-    line('After the Crash: '  + (briefModelAfter  || '[No selection]'));
-    line('Model generated: ' + (briefModelCreated ? 'Yes' : 'No'));
-    blank();
-
-    // Scientific Brief
-    dash(); line('  SCIENTIFIC BRIEF BUILDER'); dash(); blank();
-    line('Your Claim:');
-    const claimVal = journalData['brief_claim'];
-    line(claimVal && claimVal.trim() ? claimVal.trim() : '[No response]');
-    blank();
-    line('Support with Evidence from the Car:');
-    const evCarVal = journalData['brief_evcar'];
-    line(evCarVal && evCarVal.trim() ? evCarVal.trim() : '[No response]');
-    blank();
-    line('Support with Evidence from the Surroundings:');
-    const evSurrVal = journalData['brief_evsurr'];
-    line(evSurrVal && evSurrVal.trim() ? evSurrVal.trim() : '[No response]');
-    blank();
-    line('Your Scientific Explanation:');
-    const explVal = journalData['brief_expl'];
-    line(explVal && explVal.trim() ? explVal.trim() : '[No response]');
-    blank();
-
-    // Generated brief
-    dash(); line('  COMPLETED SCIENTIFIC BRIEF'); dash(); blank();
-    if (journalData['brief_generated']) {
-      line('IMPACT MOTORS');
-      line('Crash Test Scientific Brief');
-      blank();
-      line('Prepared by: Junior Crash Test Scientist Team');
-      blank();
-      line('Claim:');
-      line(journalData['brief_claim'] || '(not completed)'); blank();
-      line('Support with Evidence from the Car:');
-      line(journalData['brief_evcar'] || '(not completed)'); blank();
-      line('Support with Evidence from the Surroundings:');
-      line(journalData['brief_evsurr'] || '(not completed)'); blank();
-      line('Scientific Explanation:');
-      line(journalData['brief_expl'] || '(not completed)'); blank();
-      line('Final Message to the Engineering Team:');
-      line('The crash test evidence shows that energy does not disappear during a crash.');
-      line('Understanding where and how energy is transferred can help engineers design safer vehicles.');
-    } else {
-      line('[Scientific brief not created yet]');
+    // ---- DP1 ----
+    flow += dpHTML(1, 'Where will you begin?', dp1Label, '');
+    if (decisions.dp1 === 'A' || (!decisions.dp1 && val('s4a'))) {
+      flow += entry('Path A — Motion', 'What did you notice about the car’s motion before impact in each test run? How did the motion differ between the three test runs? What patterns do you notice?', val('s4a'));
+      // Test data log (student replays + observations)
+      let rows = '';
+      [1, 2, 3].forEach(nn => {
+        const status = csTestLog[nn] ? 'Replayed at ' + esc(csTestLog[nn]) : 'Not replayed';
+        const obs = (csObservations[nn] && String(csObservations[nn]).trim()) ? esc(String(csObservations[nn]).trim()) : '<span class="empty">[No observation]</span>';
+        rows += '<tr><td>Test Run ' + nn + '</td><td>' + status + '</td><td>' + obs + '</td></tr>';
+      });
+      flow += '<div class="model"><div class="model-h">🔬 Test Data Log — Motion Analysis</div>'
+            + '<table class="mtab"><thead><tr><th>Run</th><th>Status</th><th>Observation</th></tr></thead><tbody>'
+            + rows + '</tbody></table></div>';
     }
-    blank();
+    if (decisions.dp1 === 'B' || (!decisions.dp1 && val('s4b'))) {
+      flow += entry('Path B — Damage', 'What changes do you observe after impact in each test run? How do the changes differ across the test runs? What patterns do you notice about where the vehicle changes or damage appears?', val('s4b'));
+    }
 
-    // Final Reflection
-    dash(); line('  FINAL REFLECTION'); dash(); blank();
-    const frEv = localStorage.getItem('sins_finalReflectionEvidence') || '';
-    const frTh = localStorage.getItem('sins_finalReflectionThinking') || '';
-    line('How did this investigation show you how scientists use evidence to explain real-world events?');
-    line(frEv.trim() || '[No response]'); blank();
-    line('What changed your thinking the most during your investigation, and what evidence caused that change?');
-    line(frTh.trim() || '[No response]'); blank();
+    // ---- Convergence 1 ----
+    flow += entry('Team Briefing — What Did We Notice?', 'What patterns do you notice across the test runs? Use evidence from at least two test runs.', val('s5a'));
+    flow += entry('Team Briefing — Explaining the Crash Pattern', 'How does the Crash Science Briefing help explain why some test runs showed more change than others? What evidence supports your thinking?', val('s5b'));
 
-    rule(); line('  END OF FIELD JOURNAL'); rule();
-    return L.join('\n');
+    // ---- DP2 ----
+    flow += dpHTML(2, 'How does energy move through a crash?', dp2Label, '');
+    if (decisions.dp2 === 'A' || (!decisions.dp2 && val('s7a'))) {
+      flow += entry('Path A — Into the Car', 'What evidence do you see that energy was transferred through the car during the crash? Use details from at least one test run.', val('s7a'));
+      flow += '<div class="note-line">Energy analysis — test run selected: <b>' + (dp2aSelectedRun ? 'Test Run ' + esc(dp2aSelectedRun) : 'None') + '</b> · analysis run: <b>' + (dp2aAnalysisRun ? 'Yes' : 'No') + '</b></div>';
+    }
+    if (decisions.dp2 === 'B' || (!decisions.dp2 && val('s7b'))) {
+      flow += entry('Path B — Into the Surroundings', 'What evidence do you see that energy was transferred to the surroundings during the crash? Use details from at least one test run.', val('s7b'));
+      flow += '<div class="note-line">Energy analysis — test run selected: <b>' + (dp2bSelectedRun ? 'Test Run ' + esc(dp2bSelectedRun) : 'None') + '</b> · analysis run: <b>' + (dp2bAnalysisRun ? 'Yes' : 'No') + '</b></div>';
+    }
+
+    // ---- Student model: Crash Energy Model (Section 8B) ----
+    flow += '<div class="model accent"><div class="model-h">🚗 Crash Energy Model — student-built</div>'
+          + '<div class="model-grid">'
+          + '<div class="mcell"><span class="ml">Before the crash</span><span class="mv">' + (briefModelBefore ? esc(briefModelBefore) : '<span class="empty">[No selection]</span>') + '</span></div>'
+          + '<div class="mcell"><span class="ml">During the crash</span><span class="mv">' + (briefModelDuring ? esc(briefModelDuring) : '<span class="empty">[No selection]</span>') + '</span></div>'
+          + '<div class="mcell"><span class="ml">After the crash</span><span class="mv">' + (briefModelAfter ? esc(briefModelAfter) : '<span class="empty">[No selection]</span>') + '</span></div>'
+          + '</div>'
+          + '<div class="model-status">Model generated: <b>' + (briefModelCreated ? 'Yes' : 'No') + '</b></div></div>';
+    flow += entry('Modeling Energy Transfer', 'Look at the crash energy model you built. What evidence led you to choose your model?', val('s8b'));
+
+    // ---- Student artifact: Scientific Brief ----
+    const briefGen = !!journalData['brief_generated'];
+    flow += '<div class="model accent"><div class="model-h">📋 Scientific Brief — student-built' + (briefGen ? ' <span class="badge">Completed</span>' : '') + '</div>'
+          + '<div class="brief-row"><span class="ml">Claim</span><div class="mv">' + (val('brief_claim') ? esc(val('brief_claim')) : '<span class="empty">[No response]</span>') + '</div></div>'
+          + '<div class="brief-row"><span class="ml">Evidence from the car</span><div class="mv">' + (val('brief_evcar') ? esc(val('brief_evcar')) : '<span class="empty">[No response]</span>') + '</div></div>'
+          + '<div class="brief-row"><span class="ml">Evidence from the surroundings</span><div class="mv">' + (val('brief_evsurr') ? esc(val('brief_evsurr')) : '<span class="empty">[No response]</span>') + '</div></div>'
+          + '<div class="brief-row"><span class="ml">Scientific explanation</span><div class="mv">' + (val('brief_expl') ? esc(val('brief_expl')) : '<span class="empty">[No response]</span>') + '</div></div>';
+    if (briefGen) {
+      flow += '<div class="brief-final"><b>Final message to the engineering team:</b> The crash test evidence shows that energy does not disappear during a crash. Understanding where and how energy is transferred can help engineers design safer vehicles.</div>';
+    }
+    flow += '</div>';
+
+    // ---- Final Reflection ----
+    const frEv = (localStorage.getItem('sins_finalReflectionEvidence') || '').trim();
+    const frTh = (localStorage.getItem('sins_finalReflectionThinking') || '').trim();
+    flow += dpHTML('★', 'Final reflection', '', '');
+    flow += entry('Mission Debrief', 'How did this investigation show you how scientists use evidence to explain real-world events?', frEv);
+    flow += entry('Mission Debrief', 'What changed your thinking the most during your investigation, and what evidence caused that change?', frTh);
+
+    // ---- timing rows ----
+    const timingRows = Object.entries(sectionTimings)
+      .filter(([id, s]) => s > 0)
+      .map(([id, s]) => '<tr><td>' + esc(sectionNames[id] || id) + '</td><td class="t">' + fmtTime(s) + '</td></tr>')
+      .join('') || '<tr><td>No section timing recorded</td><td class="t">&mdash;</td></tr>';
+
+    const css = ':root{--navy:#2E4A72;--navy-dark:#1E3354;--orange:#F97316;--orange-dim:#c45c0d;--blue:#3B82F6;--blue-dim:#2563eb;--off-white:#F8FAFC;--g-light:#E5E7EB;--g-steel:#94A3B8;--g-mid:#C1C9D4;--ink:#1E293B;--success:#22C55E;}'
+      + '*{box-sizing:border-box;}'
+      + "body{margin:0;background:var(--off-white);color:var(--ink);font-family:'Nunito',Verdana,sans-serif;line-height:1.6;font-size:16px;}"
+      + '.wrap{max-width:760px;margin:0 auto;padding:28px 20px 60px;}'
+      + '.hero{background:var(--navy);color:#fff;border-radius:16px;padding:24px;}'
+      + '.hero h1{margin:0;font-size:24px;font-weight:800;}'
+      + '.hero .sub{color:#fdba74;font-weight:700;margin-top:2px;}'
+      + '.meta{margin-top:14px;display:flex;flex-wrap:wrap;gap:8px 18px;font-size:13.5px;color:#cbd5e1;}'
+      + '.meta b{color:#fff;}'
+      + '.std{margin-top:14px;background:rgba(255,255,255,.10);border-radius:10px;padding:10px 13px;font-size:13px;color:#e2e8f0;}'
+      + 'h1,h2,h3{font-weight:800;}'
+      + '.section-label{font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--g-steel);font-weight:800;margin:30px 0 12px;}'
+      + '.quick{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0 4px;}'
+      + '.qcard{flex:1;min-width:150px;background:#fff;border:1px solid var(--g-light);border-radius:12px;padding:12px 14px;border-top:4px solid var(--orange);}'
+      + '.qcard .step{font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--g-steel);font-weight:700;}'
+      + '.qcard .pick{font-weight:800;font-size:15px;margin-top:3px;color:var(--navy);}'
+      + '.qcard.time{border-top-color:var(--blue);}.qcard.time .pick{color:var(--blue-dim);}'
+      + '.dp-head{display:flex;gap:12px;align-items:flex-start;background:var(--navy);color:#fff;border-radius:12px;padding:12px 16px;margin:26px 0 14px;}'
+      + '.dp-head .dp-n{width:30px;height:30px;flex:none;border-radius:50%;background:var(--orange);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;}'
+      + '.dp-head .dp-t{font-weight:800;font-size:17px;}'
+      + '.dp-head .dp-c{font-size:14px;color:#cbd5e1;}'
+      + '.dp-head .dp-x{font-size:13px;color:#cbd5e1;margin-top:2px;}'
+      + '.entry{background:#fff;border:1px solid var(--g-light);border-left:4px solid var(--blue);border-radius:0 12px 12px 0;padding:15px 18px;margin-bottom:14px;}'
+      + '.entry .ekic{font-size:11.5px;text-transform:uppercase;letter-spacing:.04em;color:var(--g-steel);font-weight:700;margin-bottom:4px;}'
+      + '.entry h3.q{margin:0 0 8px;color:var(--navy);font-weight:700;font-size:15px;}'
+      + '.entry .a{margin:0;white-space:pre-wrap;}'
+      + '.empty{color:var(--g-steel);font-style:italic;}'
+      + '.note-line{font-size:13.5px;color:var(--g-steel);margin:-6px 0 16px 4px;}'
+      + '.model{background:#fff;border:1px solid var(--g-light);border-radius:12px;padding:16px 18px;margin-bottom:14px;}'
+      + '.model.accent{border:2px solid var(--orange);background:#fff7ed;}'
+      + '.model-h{font-weight:800;color:var(--orange-dim);margin-bottom:10px;font-size:15px;}'
+      + '.model-h .badge{background:var(--success);color:#fff;font-size:11px;padding:2px 8px;border-radius:999px;vertical-align:middle;margin-left:6px;}'
+      + '.model-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}'
+      + '@media(max-width:560px){.model-grid{grid-template-columns:1fr;}}'
+      + '.mcell{background:#fff;border:1px solid var(--g-light);border-radius:8px;padding:10px;}'
+      + '.mcell .ml,.brief-row .ml{display:block;font-size:11.5px;text-transform:uppercase;letter-spacing:.04em;color:var(--g-steel);font-weight:700;margin-bottom:3px;}'
+      + '.mcell .mv{font-weight:700;color:var(--navy);}'
+      + '.model-status{margin-top:10px;font-size:14px;}'
+      + '.mtab{width:100%;border-collapse:collapse;font-size:14px;}'
+      + '.mtab th{text-align:left;color:var(--g-steel);font-size:12px;text-transform:uppercase;letter-spacing:.04em;padding:6px 10px;border-bottom:1px solid var(--g-light);}'
+      + '.mtab td{padding:7px 10px;border-bottom:1px solid var(--g-light);vertical-align:top;}'
+      + '.mtab tr:last-child td{border-bottom:none;}'
+      + '.brief-row{margin-bottom:10px;}'
+      + '.brief-row .mv{white-space:pre-wrap;}'
+      + '.brief-final{background:#fff;border-left:4px solid var(--orange);border-radius:0 8px 8px 0;padding:10px 14px;font-size:14px;margin-top:6px;}'
+      + '.timing{background:#fff;border:1px solid var(--g-light);border-radius:12px;padding:8px 4px;}'
+      + '.timing table{width:100%;border-collapse:collapse;font-size:14px;}'
+      + '.timing td{padding:7px 14px;border-bottom:1px solid var(--g-light);}'
+      + '.timing tr:last-child td{border-bottom:none;}'
+      + '.timing td.t{text-align:right;color:var(--navy);font-weight:700;white-space:nowrap;}'
+      + '.timing .total td{font-weight:800;background:#fff7ed;}'
+      + '.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0;}'
+      + '.foot{margin-top:34px;padding-top:16px;border-top:1px solid var(--g-light);font-size:12px;color:var(--g-steel);text-align:center;}'
+      + '@media print{body{background:#fff;}.wrap{max-width:none;padding:0;}.entry,.dp-head,.hero,.model{break-inside:avoid;page-break-inside:avoid;}}';
+
+    const html = '<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">'
+      + '<meta name="viewport" content="width=device-width, initial-scale=1.0">'
+      + '<title>Impact Motors \u2014 Field Journal' + (studentId ? ' \u2014 ' + esc(studentId) : '') + '</title>'
+      + '<link rel="preconnect" href="https://fonts.googleapis.com">'
+      + '<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">'
+      + '<style>' + css + '</style></head><body><div class="wrap">'
+      + '<div class="hero"><h1>Impact Motors: Crash Investigation</h1><div class="sub">Field Journal</div>'
+      + '<div class="meta">'
+      + '<span><b>Investigator:</b> ' + (studentId ? esc(studentId) : '(not provided)') + '</span>'
+      + (typeof resumeCode !== 'undefined' && resumeCode ? '<span><b>Resume code:</b> ' + esc(resumeCode) + '</span>' : '')
+      + '<span><b>Exported:</b> ' + esc(new Date().toLocaleString()) + '</span>'
+      + '</div>'
+      + '<div class="std"><b>Arizona Grade 5 \u00b7 5.P4U1.6</b> \u2014 Plan and carry out investigations that explain how the motion and interactions of objects can transfer energy from one object to another.</div>'
+      + '</div>'
+      + '<div class="quick" aria-label="Quick summary">'
+      + '<div class="qcard"><div class="step">1 \u00b7 Begin</div><div class="pick">' + esc(decisions.dp1 === 'A' ? 'Motion evidence' : decisions.dp1 === 'B' ? 'Damage evidence' : '—') + '</div></div>'
+      + '<div class="qcard"><div class="step">2 \u00b7 Energy</div><div class="pick">' + esc(decisions.dp2 === 'A' ? 'Vehicle changes' : decisions.dp2 === 'B' ? 'Surrounding effects' : '—') + '</div></div>'
+      + '<div class="qcard time"><div class="step">Total time in lesson</div><div class="pick">' + fmtTime(totalSec) + '</div></div>'
+      + '</div>'
+      + '<h2 class="section-label">Field journal &amp; student-built models</h2>'
+      + flow
+      + '<h2 class="section-label">Lesson data</h2>'
+      + '<div class="timing"><table><caption class="sr-only">Time spent on each section of the lesson.</caption><tbody>'
+      + timingRows
+      + '<tr class="total"><td>Total time in lesson</td><td class="t">' + fmtTime(totalSec) + '</td></tr>'
+      + '</tbody></table></div>'
+      + '<div class="foot">\u00a9 2026 Brooke Toon \u00b7 Stories in Science Framework \u00b7 Generative AI tools were used to support development of this instructional material.</div>'
+      + '</div></body></html>';
+    return html;
   }
 
   function doExportJournal(studentId) {
-    const text     = buildExportText(studentId);
+    const html     = buildExportHTML(studentId);
     const name     = (studentId || '').trim();
-    const filename = name ? name + 'ImpactMotorsJournal.txt' : 'ImpactMotorsJournal.txt';
-    const blob     = new Blob([text], { type: 'text/plain; charset=utf-8' });
+    const filename = name ? name + 'ImpactMotorsJournal.html' : 'ImpactMotorsJournal.html';
+    const blob     = new Blob([html], { type: 'text/html; charset=utf-8' });
     const url      = URL.createObjectURL(blob);
     const a        = document.createElement('a');
     a.href         = url;
