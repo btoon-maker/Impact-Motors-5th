@@ -4448,13 +4448,27 @@ Where will you start your energy analysis?      </p>
         <p>Investigation complete.</p>
       </div>
 
-      <!-- Finish row -->
-      <div class="s11-finish-row">
+      <!-- Finish card -->
+      <div style="background:linear-gradient(135deg,var(--navy-dark),var(--navy));border-radius:var(--radius-lg,16px);padding:36px 28px;text-align:center;margin-top:20px;">
+
+        <div style="font-family:var(--font-ui);font-size:1.5rem;font-weight:700;color:#fff;margin-bottom:12px;">✔ Lesson Complete</div>
+
+        <p style="font-family:var(--font-ui);color:#dbe4f0;margin:0 0 4px;">Follow both steps below to finish. Do them in order.</p>
+
+        <p style="font-family:var(--font-ui);font-size:0.9rem;color:var(--blue-on-dark);margin:0 0 24px;">You'll need your classroom login/study ID to save your journal and take the survey.</p>
+
+        <div style="display:flex;flex-direction:column;align-items:center;gap:12px;">
+
+          <button class="btn btn-export" style="width:100%;max-width:340px;justify-content:center;" onclick="exportJournal()">Step 1 · Export My Field Journal</button>
+
+          <a href="https://asu.questionpro.com/t/AdPa5Z9Jcy" target="_blank" rel="noopener" class="btn" style="background:transparent;color:#fff;border:2px solid #fff;width:100%;max-width:340px;box-sizing:border-box;text-decoration:none;text-align:center;padding:12px 28px;border-radius:var(--radius,10px);font-family:var(--font-ui);">Step 2 · Lesson Engagement Survey ↗</a>
+
+        </div>
+
+      </div>
+
+      <div class="s11-finish-row" style="margin-top:20px;">
         <button class="btn btn-back" onclick="goBack()">← Back</button>
-        <button class="btn btn-export" onclick="exportJournal()">
-          ⬇ Export My Field Journal
-        </button>
-        <span class="s11-complete-badge">✔ Lesson Complete</span>
       </div>
 
       <p style="font-family:var(--font-ui); font-size: 17px; color:var(--gray-steel); margin-top:14px;">
@@ -4478,18 +4492,13 @@ Where will you start your energy analysis?      </p>
     <div class="im-modal-body">
       <div style="background:#f4f6f8;padding:12px 14px;border-radius:12px;margin-bottom:14px;line-height:1.45;color:#243044 !important;">
         <p style="margin:0 0 10px 0;color:#243044 !important;">
-          <strong style="color:#1f2937 !important;">Have a study ID?</strong><br>
-          Enter it below. You will upload this Field Journal in your engagement survey.
-        </p>
-
-        <p style="margin:0 0 10px 0;color:#243044 !important;">
-          <strong style="color:#1f2937 !important;">No study ID?</strong><br>
-          Enter your name or follow your teacher’s directions.
+          <strong style="color:#1f2937 !important;">Use your classroom login/study ID as the file name.</strong><br>
+          Enter it below. You will upload this Field Journal to your engagement survey.
         </p>
 
         <p style="margin:0;color:#243044 !important;">
-          <strong style="color:#1f2937 !important;">Save your journal.</strong><br>
-          It will help during your post-lesson debrief.
+          <strong style="color:#1f2937 !important;">Forgot your login/study ID?</strong><br>
+          Please ask your teacher for help.
         </p>
       </div>
 
