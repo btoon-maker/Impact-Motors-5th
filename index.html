@@ -4118,6 +4118,23 @@ Where will you start your energy analysis?      </p>
         <p>They need a scientific explanation of <strong>why the crash results were different</strong>.</p>
       </div>
 
+      <!-- ── FIELD JOURNAL (lesson's own) ── -->
+      <div class="field-journal">
+        <div class="journal-header">
+          <div class="journal-icon">📓</div>
+          <div class="journal-label">Field Journal</div>
+          <div class="journal-save-badge" id="saved-s8">✔ Saved</div>
+        </div>
+        <div class="journal-prompt">
+          <strong>Compare what each investigation revealed about energy transfer.</strong><br>
+          <em>Using evidence from both paths, where did the energy go during the crash, and how do you know?</em>
+        </div>
+        <textarea class="journal-textarea"
+                  id="journal-s8"
+                  placeholder="Write your explanation here…"
+                  oninput="saveJournal('s8', this.value)"></textarea>
+      </div>
+
       <!-- Navigation -->
       <div class="nav-row">
         <button class="btn btn-back" onclick="goBack()">← Back</button>
@@ -4958,6 +4975,9 @@ Where will you start your energy analysis?      </p>
       flow += entry('Path B — Into the Surroundings', 'What evidence do you see that energy was transferred to the surroundings during the crash? Use details from at least one test run.', val('s7b'));
       flow += '<div class="note-line">Energy analysis — test run selected: <b>' + (dp2bSelectedRun ? 'Test Run ' + esc(dp2bSelectedRun) : 'None') + '</b> · analysis run: <b>' + (dp2bAnalysisRun ? 'Yes' : 'No') + '</b></div>';
     }
+
+    // ---- Convergence 2 ----
+    flow += entry('Team Briefing — What Did We Discover About Energy?', 'Compare what each investigation revealed about energy transfer. Using evidence from both paths, where did the energy go during the crash, and how do you know?', val('s8'));
 
     // ---- Student model: Crash Energy Model (Section 8B) ----
     flow += '<div class="model accent"><div class="model-h">🚗 Crash Energy Model — student-built</div>'
