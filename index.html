@@ -2846,7 +2846,7 @@
   </div>
   <!-- Utility buttons — hidden on Section 0 -->
   <div id="util-buttons">
-    <button class="btn-util" onclick="exportModalOpen()" title="Download your field journal">⬇ Export Journal</button>
+    <button class="btn-util" onclick="exportModalOpen()" title="Save your field journal as PDF">Save Field Journal as PDF</button>
     <button class="btn-util" onclick="glossaryModalOpen()" title="View investigation vocabulary">📖 Glossary</button>
     <button class="btn-util btn-util-danger" onclick="confirmModalOpen()" title="Clear progress and restart">↺ Restart</button>
   </div>
@@ -4472,15 +4472,18 @@ Where will you start your energy analysis?      </p>
 
         <div style="font-family:var(--font-ui);font-size:1.5rem;font-weight:700;color:#fff;margin-bottom:12px;">✔ Lesson Complete</div>
 
-        <p style="font-family:var(--font-ui);color:#dbe4f0;margin:0 0 4px;">Follow both steps below to finish. Do them in order.</p>
-
-        <p style="font-family:var(--font-ui);font-size:0.9rem;color:var(--blue-on-dark);margin:0 0 24px;">You'll need your classroom login/study ID to save your journal and take the survey.</p>
+        <div style="max-width:680px;margin:0 auto 20px;text-align:left;">
+          <p style="font-family:var(--font-ui);color:#dbe4f0;margin:0 0 8px;"><strong>Step 1: Save Your Field Journal as PDF</strong></p>
+          <p style="font-family:var(--font-ui);font-size:0.9rem;color:var(--blue-on-dark);margin:0 0 18px;">Select <strong>Save Field Journal as PDF</strong>. In the print window, choose <strong>Save as PDF</strong> and save the file using your classroom login/study ID — not your name.</p>
+          <p style="font-family:var(--font-ui);color:#dbe4f0;margin:0 0 8px;"><strong>Step 2: Complete the Lesson Engagement Survey</strong></p>
+          <p style="font-family:var(--font-ui);font-size:0.9rem;color:var(--blue-on-dark);margin:0;">Continue to the survey and upload your PDF journal when prompted.</p>
+        </div>
 
         <div style="display:flex;flex-direction:column;align-items:center;gap:12px;">
 
-          <button class="btn btn-export" style="width:100%;max-width:340px;justify-content:center;" onclick="exportJournal()">Step 1 · Export My Field Journal</button>
+          <button class="btn btn-export" style="width:100%;max-width:340px;justify-content:center;" onclick="exportJournal()">Save Field Journal as PDF</button>
 
-          <a href="https://asu.questionpro.com/t/AdPa5Z9Jcy" target="_blank" rel="noopener" class="btn" style="background:transparent;color:#fff;border:2px solid #fff;width:100%;max-width:340px;box-sizing:border-box;text-decoration:none;text-align:center;padding:12px 28px;border-radius:var(--radius,10px);font-family:var(--font-ui);">Step 2 · Lesson Engagement Survey ↗</a>
+          <a href="https://asu.questionpro.com/t/AdPa5Z9Jcy" target="_blank" rel="noopener" class="btn" style="background:transparent;color:#fff;border:2px solid #fff;width:100%;max-width:340px;box-sizing:border-box;text-decoration:none;text-align:center;padding:12px 28px;border-radius:var(--radius,10px);font-family:var(--font-ui);">Continue to Lesson Engagement Survey ↗</a>
 
         </div>
 
@@ -4504,13 +4507,13 @@ Where will you start your energy analysis?      </p>
 ============================================================ -->
 <div class="im-modal-overlay" id="export-modal" role="dialog" aria-modal="true" aria-labelledby="export-modal-title">
   <div class="im-modal-box">
-    <div class="im-modal-title" id="export-modal-title">Export Your Field Journal</div>
+    <div class="im-modal-title" id="export-modal-title">Save Your Field Journal as PDF</div>
 
     <div class="im-modal-body">
       <div style="background:#f4f6f8;padding:12px 14px;border-radius:12px;margin-bottom:14px;line-height:1.45;color:#243044 !important;">
         <p style="margin:0 0 10px 0;color:#243044 !important;">
-          <strong style="color:#1f2937 !important;">Use your classroom login/study ID as the file name.</strong><br>
-          Enter it below. You will upload this Field Journal to your engagement survey.
+          <strong style="color:#1f2937 !important;">Use your classroom login/study ID as the file name — not your name.</strong><br>
+          Enter it below. The styled Field Journal will open in the browser print window; choose <strong>Save as PDF</strong>.
         </p>
 
         <p style="margin:0;color:#243044 !important;">
@@ -4520,21 +4523,21 @@ Where will you start your energy analysis?      </p>
       </div>
 
       <span style="color:#ffffff;">
-        <strong>ImpactMotorsJournal</strong> will be added automatically to the end of the filename.
+        <strong>ImpactMotorsJournal</strong> will be added automatically to the end of the PDF filename.
       </span>
     </div>
 
-    <label class="im-modal-label" for="export-name-input">login/study ID or name:</label>
-    <input class="im-modal-input" type="text" id="export-name-input" placeholder="e.g. SIS-001 or Jordan"
-           oninput="exportModalPreview()" aria-label="Study ID or name for the filename" />
+    <label class="im-modal-label" for="export-name-input">Classroom login/study ID:</label>
+    <input class="im-modal-input" type="text" id="export-name-input" placeholder="e.g. SIS-001"
+           oninput="exportModalPreview()" aria-label="Classroom login or study ID for the PDF filename" />
 
     <div class="im-modal-preview">
-      Filename: <span id="export-filename-preview">ImpactMotorsJournal.html</span>
+      Filename: <span id="export-filename-preview">ImpactMotorsJournal.pdf</span>
     </div>
 
     <div class="im-modal-btns">
       <button class="btn-cancel" onclick="exportModalClose()">Cancel</button>
-      <button class="btn-export-go" onclick="exportModalConfirm()">Export</button>
+      <button class="btn-export-go" onclick="exportModalConfirm()">Save Field Journal as PDF</button>
     </div>
   </div>
 </div>
@@ -4874,14 +4877,14 @@ Where will you start your energy analysis?      </p>
   // ── Export Journal ────────────────────────────────────────────
 
   /**
-   * Build and download a plain-text export of the student's
-   * full Field Journal, decisions made, and a timestamp.
+   * Build the student's fully styled Field Journal and open the
+   * browser print workflow so it can be saved as a PDF.
    */
   // ── Export Modal ─────────────────────────────────────────────
 
   function exportModalOpen() {
     document.getElementById('export-name-input').value = '';
-    document.getElementById('export-filename-preview').textContent = 'ImpactMotorsJournal.html';
+    document.getElementById('export-filename-preview').textContent = 'ImpactMotorsJournal.pdf';
     document.getElementById('export-modal').classList.add('open');
     setTimeout(() => document.getElementById('export-name-input').focus(), 100);
   }
@@ -4892,13 +4895,12 @@ Where will you start your energy analysis?      </p>
 
   function exportModalPreview() {
     const name = document.getElementById('export-name-input').value.trim();
-    const preview = name ? name + 'ImpactMotorsJournal.html' : 'ImpactMotorsJournal.html';
+    const preview = name ? name + 'ImpactMotorsJournal.pdf' : 'ImpactMotorsJournal.pdf';
     document.getElementById('export-filename-preview').textContent = preview;
   }
 
   function exportModalConfirm() {
     const name = document.getElementById('export-name-input').value.trim();
-    exportModalClose();
     doExportJournal(name);
   }
 
@@ -5069,7 +5071,15 @@ Where will you start your energy analysis?      </p>
       + '.timing .total td{font-weight:800;background:#fff7ed;}'
       + '.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0;}'
       + '.foot{margin-top:34px;padding-top:16px;border-top:1px solid var(--g-light);font-size:12px;color:var(--g-steel);text-align:center;}'
-      + '@media print{body{background:#fff;}.wrap{max-width:none;padding:0;}.entry,.dp-head,.hero,.model{break-inside:avoid;page-break-inside:avoid;}}';
+      + '@page{size:auto;margin:0.5in;}'
+      + '@media print{'
+      + 'html,body{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;}'
+      + 'body{background:#fff;margin:0;}'
+      + '.wrap{max-width:none;padding:0;}'
+      + '.hero,.qcard,.dp-head,.entry,.model,.timing{break-inside:avoid;page-break-inside:avoid;}'
+      + '.section-label{break-after:avoid;page-break-after:avoid;}'
+      + '.no-print,button,.btn{display:none!important;}'
+      + '}';
 
     const html = '<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">'
       + '<meta name="viewport" content="width=device-width, initial-scale=1.0">'
@@ -5103,18 +5113,37 @@ Where will you start your energy analysis?      </p>
   }
 
   function doExportJournal(studentId) {
-    const html     = buildExportHTML(studentId);
     const name     = (studentId || '').trim();
-    const filename = name ? name + 'ImpactMotorsJournal.html' : 'ImpactMotorsJournal.html';
-    const blob     = new Blob([html], { type: 'text/html; charset=utf-8' });
-    const url      = URL.createObjectURL(blob);
-    const a        = document.createElement('a');
-    a.href         = url;
-    a.download     = filename;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
+    const filename = name ? name + 'ImpactMotorsJournal.pdf' : 'ImpactMotorsJournal.pdf';
+    const printWindow = window.open('', '_blank');
+    if (!printWindow) {
+      alert('Please allow pop-ups for this lesson so the PDF print window can open.');
+      return;
+    }
+
+    exportModalClose();
+    const html = buildExportHTML(studentId);
+
+    printWindow.document.open();
+    printWindow.document.write(html);
+    printWindow.document.close();
+
+    const openPrintDialog = () => {
+      try {
+        printWindow.document.title = filename.replace(/\.pdf$/i, '');
+        printWindow.focus();
+        printWindow.print();
+      } catch (err) {
+        console.error('Unable to open print dialog:', err);
+      }
+    };
+
+    // Wait for the styled journal (including the web font) before opening Print / Save as PDF.
+    if (printWindow.document.fonts && printWindow.document.fonts.ready) {
+      printWindow.document.fonts.ready.then(() => setTimeout(openPrintDialog, 150));
+    } else {
+      printWindow.addEventListener('load', () => setTimeout(openPrintDialog, 150), { once: true });
+    }
   }
 
   // Keep legacy name so any old inline onclick="exportJournal()" still works
